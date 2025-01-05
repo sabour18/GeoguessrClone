@@ -120,4 +120,3 @@ sw.*
 
 # Vim swap files
 *.swp
-/src/components/Play/Result.vue

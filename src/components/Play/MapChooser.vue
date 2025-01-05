@@ -12,7 +12,8 @@
     },
     async mounted() {
       const apiOptions = {
-        apiKey: import.meta.env.VITE_GOOGLE_MAPS_API_KEY
+        apiKey: import.meta.env.VITE_GOOGLE_MAPS_API_KEY,
+        mapId: "DEMO_MAP_ID"
       }
       const loader = new Loader(apiOptions);
 
@@ -22,7 +23,7 @@
 
     },
     methods: {
-      displayMap() {
+      async displayMap() {
         const mapOptions = {
           center: { lat: 0, lng: 0 },
           zoom: 1,
@@ -45,11 +46,13 @@
         this.marker = null;
 
       },
-      addMarker(location) {
+      async addMarker(location) {
+        const { AdvancedMarkerElement } = await google.maps.importLibrary("marker");
+
         if (this.marker) {
           this.marker.setPosition(location);
         } else {
-          this.marker = new google.maps.Marker({
+          this.marker = new AdvancedMarkerElement({
             position: location,
             map: this.map,
           });
