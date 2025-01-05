@@ -41,9 +41,33 @@
         guessPin.src = "https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png";
         const guessMarker = new AdvancedMarkerElement({
           map: this.map,
-          position: this.guessLocation,
+          position: { lat: this.guessLocation.lat, lng: this.guessLocation.lng },
           content: guessPin,
         });
+      },
+      calcDistance() {
+        const R = 6371; // Radius of the Earth in kilometers
+        const lat1 = this.location.lat;
+        const lng1 = this.location.lng;
+        const lat2 = this.guessLocation.lat;
+        const lng2 = this.guessLocation.lng;
+
+        // Convert degrees to radians
+        const toRadians = (degree) => degree * (Math.PI / 180);
+
+        const dLat = toRadians(lat2 - lat1);
+        const dLng = toRadians(lng2 - lng1);
+
+        const a =
+          Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+          Math.cos(toRadians(lat1)) *
+          Math.cos(toRadians(lat2)) *
+          Math.sin(dLng / 2) *
+          Math.sin(dLng / 2);
+
+        const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+
+        return R * c; // Distance in kilometers
       },
     },
   }
@@ -53,8 +77,7 @@
   <div class="result">
     <div id="res"></div>
     <div class="result-nums">
-      <div>Actual: ({{this.location.lat}}, {{this.location.lng}})</div>
-      <div>Guessed: {{this.guessLocation}}</div>
+      <div>Distance: {{Math.round(this.calcDistance() * 100) / 100}} km</div>
     </div>
     <button class="result-button">Next</button>
   </div>

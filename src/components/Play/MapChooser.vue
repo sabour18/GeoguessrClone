@@ -23,7 +23,7 @@
 
     },
     methods: {
-      async displayMap() {
+      displayMap() {
         const mapOptions = {
           center: { lat: 0, lng: 0 },
           zoom: 1,
@@ -46,13 +46,11 @@
         this.marker = null;
 
       },
-      async addMarker(location) {
-        const { AdvancedMarkerElement } = await google.maps.importLibrary("marker");
-
+      addMarker(location) {
         if (this.marker) {
           this.marker.setPosition(location);
         } else {
-          this.marker = new AdvancedMarkerElement({
+          this.marker = new google.maps.Marker({
             position: location,
             map: this.map,
           });

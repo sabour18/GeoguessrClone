@@ -24,7 +24,8 @@
     },
     methods: {
       showResult(marker) {
-        this.guessLocation = marker.position;
+        this.guessLocation = JSON.parse(JSON.stringify(marker.position));
+
         this.show = true;
       },
       // TODO: Get actual random locations. StreetViewService?
