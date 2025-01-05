@@ -1,8 +1,16 @@
-- Calculate a score
+
+
+
+- ! CHANGE FROM GOOGLE MAPS API TO SOMETHING ELSE
+	- Already racked up quite a bill just from testing
+
 - Find way to make clicker map bigger when hovered
 	-Maybe streetViewService
 - Grey out make guess button, until a marker is placed
 - Play 5 games when quick play selected
-- Get street view locations differently
+- Get new street view locations differently
 - Add Game logic file
 - Add settings screen
+
+DONE:
+- Calculate distance between the 2 points
