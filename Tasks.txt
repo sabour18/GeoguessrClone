@@ -1,0 +1,8 @@
+- Calculate a score
+- Find way to make clicker map bigger when hovered
+	-Maybe streetViewService
+- Grey out make guess button, until a marker is placed
+- Play 5 games when quick play selected
+- Get street view locations differently
+- Add Game logic file
+- Add settings screen
