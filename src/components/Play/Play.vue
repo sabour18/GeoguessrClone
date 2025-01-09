@@ -54,11 +54,16 @@
       },//getRandomCords
       nextRound() {
         this.currentRound++;
+
+        if (this.currentRound == this.rounds) {
+          this.$router.push('/');
+        }
+
         this.currentLocation = this.choosenLocations[this.currentRound];
         this.show = false;
 
         console.log("It is round: " + this.currentRound);
-      }
+      }//nextRound
     }
   }
 </script>
