@@ -22,3 +22,6 @@ export function calcDistance(location1, location2) {
 
   return Math.round((R * c) * 100) / 100; // Distance in kilometers
 }
+export function calcScore(distance) {
+  return 1000 * Math.exp(-0.5 * (distance / 2000) ** 2);
+}

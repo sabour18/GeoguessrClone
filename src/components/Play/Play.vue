@@ -16,7 +16,8 @@
         show: false,
         rounds: 5,
         currentRound: 0,
-        choosenLocations: []
+        choosenLocations: [],
+        totalScore: null
       }
     },
     emits: [

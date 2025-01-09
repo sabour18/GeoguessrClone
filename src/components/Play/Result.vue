@@ -1,11 +1,12 @@
 <script>
   import { Loader } from '@googlemaps/js-api-loader';
-  import { calcDistance } from "../../utils/helpers.js";
+  import { calcDistance, calcScore } from "../../utils/helpers.js";
 
 
   export default {
     data() {
       return {
+        score: null,
         distance: null,
         markers: [],
         mapOptions: {
@@ -31,6 +32,7 @@
       loader.load().then(() => {
         this.displayMap();
         this.distance = calcDistance(this.actualLocation, this.guessLocation);
+        this.score = calcScore(this.distance);
       });
     },
     methods:{
@@ -88,14 +90,6 @@
       },//end
       nextRound() {
         this.$emit('next-round');
-      //  this.map.setOptions(this.mapOptions);
-      //  this.markers.forEach((marker) => {
-      //    marker.setMap(null);
-      //  })
-      //  this.markers = [];
-
-      //  this.line.setMap(null); // Remove from the map
-      //  this.line = null; // Clear reference
       }
     },
   }
@@ -105,7 +99,8 @@
   <div class="result">
     <div id="res"></div>
     <div class="result-nums">
-      <div>Distance: {{ this.distance }} km</div>
+      <div class="distance">Distance: {{ this.distance }}km away</div>
+      <div class="score">Score: {{ this.score }} pts</div>
     </div>
     <button class="result-button" @click="this.nextRound">Next</button>
   </div>
@@ -127,12 +122,14 @@
   }
 
   .result-nums{
-    width: 35%;
+    width: 50%;
     margin:20px;
     display:flex;
     justify-content: space-between;
   }
-
+  .distance, .score{
+      color:white;
+  }
   #res {
     position: relative;
     width: 900px;
