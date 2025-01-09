@@ -14,7 +14,7 @@
     <h1 class="welcome">Welcome to MapPicker!</h1>
     <div class="button-group">
       <form action="/Play">
-        <button type="submit">Quick Play</button>
+        <button type="submit">Play</button>
       </form>
       <form action="#">
         <button type="submit">Thing 2</button>
