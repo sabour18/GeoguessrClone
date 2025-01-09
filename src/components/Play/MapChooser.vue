@@ -18,12 +18,17 @@
       const loader = new Loader(apiOptions);
 
       loader.load().then(() => {
-        this.displayMap();
+        this.initMap();
       });
 
     },
     methods: {
-      displayMap() {
+      initMap() {
+        if (this.marker) {
+          this.marker.setMap(null);
+          this.marker = null;
+        }
+
         const mapOptions = {
           center: { lat: 0, lng: 0 },
           zoom: 1,
@@ -66,8 +71,9 @@
           return;
         }
 
-
         this.$emit('show-result', this.marker);
+
+        this.initMap();
       }
     }
   }
