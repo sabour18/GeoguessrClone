@@ -7,10 +7,18 @@
     data() {
       return {
         distance: null,
+        markers: [],
+        mapOptions: {
+          center: { lat: 0, lng: 0 },
+          zoom: 1,
+          disableDefaultUI: true,
+          mapId: "DEMO_MAP_ID"
+        },
+        line: null
       }
     },
     props: {
-      location: Object,
+      actualLocation: Object,
       guessLocation: Object,
     },
     async mounted() {
@@ -22,28 +30,28 @@
 
       loader.load().then(() => {
         this.displayMap();
-        this.distance = calcDistance(this.location, this.guessLocation);
+        this.distance = calcDistance(this.actualLocation, this.guessLocation);
       });
     },
     methods:{
       async displayMap() {
-        const {AdvancedMarkerElement} = await google.maps.importLibrary("marker");
-
-        const mapOptions = {
-            center: { lat: 0, lng: 0 },
-            zoom: 1,
-            disableDefaultUI: true,
-            mapId: "DEMO_MAP_ID"
-        };
 
         const mapDiv = document.getElementById("res");
-        this.map = new google.maps.Map(mapDiv, mapOptions);
+        this.map = new google.maps.Map(mapDiv, this.mapOptions);
 
-        const marker = new AdvancedMarkerElement({
+        
+        this.addMarkers();
+        this.drawLine();
+      },//end
+      async addMarkers() {
+        const { AdvancedMarkerElement } = await google.maps.importLibrary("marker");
+
+        const actualMarker = new AdvancedMarkerElement({
           map: this.map,
-          position: this.location,
-          title: this.location.country,
+          position: this.actualLocation,
+          title: this.actualLocation.country,
         });
+        this.markers.push(actualMarker);
 
         const guessPin = document.createElement("img");
         guessPin.src = "https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png";
@@ -52,9 +60,8 @@
           position: { lat: this.guessLocation.lat, lng: this.guessLocation.lng },
           content: guessPin,
         });
-
-        this.drawLine();
-      },
+        this.markers.push(guessMarker);
+      },//end
       drawLine() {
         const lineSymbol = {
           path: "M 0,-1 0,1",
@@ -63,9 +70,9 @@
           scale: 3,
         };
 
-        const line = new google.maps.Polyline({
+        this.line = new google.maps.Polyline({
           path: [
-            new google.maps.LatLng(this.location.lat, this.location.lng),
+            new google.maps.LatLng(this.actualLocation.lat, this.actualLocation.lng),
             new google.maps.LatLng(this.guessLocation.lat, this.guessLocation.lng)
           ],
           strokeOpacity: 0,
@@ -75,9 +82,19 @@
               offset: "0",
               repeat: "20px",
             },
-            ],
+          ],
           map: this.map
+        });
+      },//end
+      resetMap() {
+        this.map.setOptions(this.mapOptions);
+        this.markers.forEach((marker) => {
+          marker.setMap(null);
         })
+        this.markers = [];
+
+        this.line.setMap(null); // Remove from the map
+        this.line = null; // Clear reference
       }
     },
   }
@@ -89,7 +106,7 @@
     <div class="result-nums">
       <div>Distance: {{ this.distance }} km</div>
     </div>
-    <button class="result-button">Next</button>
+    <button class="result-button" @click="this.resetMap()">Next</button>
   </div>
 </template>
 

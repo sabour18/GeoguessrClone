@@ -12,7 +12,7 @@
     data() {
       return {
         actualLocation: null,
-        guessLcoation: null,
+        guessLocation: null,
         show: false
       }
     },
@@ -51,7 +51,7 @@
 <template>
   <StreetView :actualLocation="this.actualLocation"/>
   <MapChooser @show-result="showResult"/>
-  <Result v-if="this.show" :location="this.actualLocation" :guessLocation="this.guessLocation"/>
+  <Result v-if="this.show" :actualLocation="this.actualLocation" :guessLocation="this.guessLocation"/>
 </template>
 
 <style>

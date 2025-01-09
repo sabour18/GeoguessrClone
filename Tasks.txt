@@ -14,3 +14,4 @@
 
 DONE:
 - Calculate distance between the 2 points
+- Draw line between guess and actual location
