@@ -1,4 +1,5 @@
 <script>
+  import json from '../../maps/canada.json'
   import StreetView from '../Play/StreetView.vue'
   import MapChooser from '../Play/MapChooser.vue'
   import Result from '../Play/Result.vue'
@@ -11,6 +12,7 @@
     },
     data() {
       return {
+        mapJson: json.customCoordinates,
         currentLocation: null,
         guessLocation: null,
         show: false,
@@ -24,7 +26,8 @@
       'show-result',
     ],
     mounted() {
-      this.getRandomCords();
+      console.log(this.mapJson);
+      this.getLocations();
       this.currentLocation = this.choosenLocations[this.currentRound];
     },
     methods: {
@@ -33,26 +36,23 @@
 
         this.show = true;
       },//showResult
-      getRandomCords() {
-        const locations = [
-          { lat: 60.1710018, lng: 24.939350, country: "Finland" },
-          { lat: 48.858093, lng: 2.294694, country: "France" },
-          { lat: 51.510020, lng: -0.134730, country: "Great Britain" },
-          { lat: 41.8902, lng: 12.4922, country: "Italy" },
-          { lat: 25.195302, lng: 55.272879, country: "United Arab Emirates" },
-          { lat: 1.283404, lng: 103.863134, country: "Singapore" },
-          { lat: 29.976768, lng: 31.135538, country: "Egypt" },
-          { lat: 40.757876, lng: -73.985592, country: "United States" },
-        ];
-        const availableLocations = [...locations];
-        
-        for (let i = 0; i < this.rounds; i++) {
-          const randomIndex = Math.floor(Math.random() * availableLocations.length);
-          const [s] = availableLocations.splice(randomIndex, 1);
+      getLocations() {
+        const indexes = [];
 
-          this.choosenLocations.push(s);
+        for (let i = 0; i < this.rounds; i++) {
+          let randIndex = Math.floor(Math.random() * this.mapJson.length);
+          while (indexes.includes(randIndex)) {
+            randIndex = Math.floor(Math.random() * this.mapJson.length);
+          }
+          indexes.push(randIndex);
         }
-      },//getRandomCords
+
+        console.log("These are the final indexes: " + indexes);
+
+        for (let i = 0; i < indexes.length; i++) {
+          this.choosenLocations.push(this.mapJson[indexes[i]]);
+        }
+      },//getLocations
       nextRound(score) {
         this.totalScore += score;
         this.currentRound++;
