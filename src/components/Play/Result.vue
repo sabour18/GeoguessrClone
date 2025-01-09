@@ -52,7 +52,33 @@
           position: { lat: this.guessLocation.lat, lng: this.guessLocation.lng },
           content: guessPin,
         });
-      },   
+
+        this.drawLine();
+      },
+      drawLine() {
+        const lineSymbol = {
+          path: "M 0,-1 0,1",
+          strokeOpacity: 1,
+          strokeWeight: 2,
+          scale: 3,
+        };
+
+        const line = new google.maps.Polyline({
+          path: [
+            new google.maps.LatLng(this.location.lat, this.location.lng),
+            new google.maps.LatLng(this.guessLocation.lat, this.guessLocation.lng)
+          ],
+          strokeOpacity: 0,
+          icons: [
+            {
+              icon: lineSymbol,
+              offset: "0",
+              repeat: "20px",
+            },
+            ],
+          map: this.map
+        })
+      }
     },
   }
 </script>
