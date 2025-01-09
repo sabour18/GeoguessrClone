@@ -17,7 +17,7 @@
         rounds: 5,
         currentRound: 0,
         choosenLocations: [],
-        totalScore: null
+        totalScore: 0
       }
     },
     emits: [
@@ -53,7 +53,8 @@
           this.choosenLocations.push(s);
         }
       },//getRandomCords
-      nextRound() {
+      nextRound(score) {
+        this.totalScore += score;
         this.currentRound++;
 
         if (this.currentRound == this.rounds) {
@@ -73,24 +74,23 @@
   <StreetView :actualLocation="this.currentLocation"/>
   <MapChooser @show-result="showResult"/>
   <Result v-if="this.show" @nextRound="nextRound" :actualLocation="this.currentLocation" :guessLocation="this.guessLocation"/>
-<div class="round">
-  <div>
-    Round: {{this.currentRound+1}}/{{this.rounds}}
-  </div>
+<div class="ui">
+  <div>Round: {{this.currentRound+1}}/{{this.rounds}}</div>
+  <div>Score: {{this.totalScore}}pts</div>
 </div>
 </template>
 
 <style>
-  .round {
+  .ui {
     position: fixed;
     z-index: 10;
-    width: 200px;
+    width: 300px;
     height: 50px;
     left: 0;
     top: 0;
     display:flex;
     padding: 10px;
-    justify-content: end;
+    justify-content: space-evenly;
     align-items: center;
     background: rgb(7,32,71,0.85);
     color: white;

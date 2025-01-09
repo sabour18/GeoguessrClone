@@ -89,7 +89,7 @@
         });
       },//end
       nextRound() {
-        this.$emit('next-round');
+        this.$emit('next-round', this.score);
       }
     },
   }
