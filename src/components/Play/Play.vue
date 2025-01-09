@@ -11,10 +11,11 @@
     },
     data() {
       return {
-        actualLocation: null,
+        currentLocation: null,
         guessLocation: null,
         show: false,
         rounds: 5,
+        currentRound: 0,
         choosenLocations: []
       }
     },
@@ -23,6 +24,7 @@
     ],
     mounted() {
       this.getRandomCords();
+      this.currentLocation = this.choosenLocations[this.currentRound];
     },
     methods: {
       showResult(marker) {
@@ -49,16 +51,22 @@
 
           this.choosenLocations.push(s);
         }
-        console.log(this.choosenLocations[0]);
       },//getRandomCords
+      nextRound() {
+        this.currentRound++;
+        this.currentLocation = this.choosenLocations[this.currentRound];
+        this.show = false;
+
+        console.log("It is round: " + this.currentRound);
+      }
     }
   }
 </script>
 
 <template>
-  <StreetView :actualLocation="this.choosenLocations[0]"/>
+  <StreetView :actualLocation="this.currentLocation"/>
   <MapChooser @show-result="showResult"/>
-  <Result v-if="this.show" :actualLocation="this.actualLocation" :guessLocation="this.guessLocation"/>
+  <Result v-if="this.show" @nextRound="nextRound" :actualLocation="this.currentLocation" :guessLocation="this.guessLocation"/>
 </template>
 
 <style>

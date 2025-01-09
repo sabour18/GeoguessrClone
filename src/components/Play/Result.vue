@@ -86,15 +86,16 @@
           map: this.map
         });
       },//end
-      resetMap() {
-        this.map.setOptions(this.mapOptions);
-        this.markers.forEach((marker) => {
-          marker.setMap(null);
-        })
-        this.markers = [];
+      nextRound() {
+        this.$emit('next-round');
+      //  this.map.setOptions(this.mapOptions);
+      //  this.markers.forEach((marker) => {
+      //    marker.setMap(null);
+      //  })
+      //  this.markers = [];
 
-        this.line.setMap(null); // Remove from the map
-        this.line = null; // Clear reference
+      //  this.line.setMap(null); // Remove from the map
+      //  this.line = null; // Clear reference
       }
     },
   }
@@ -106,7 +107,7 @@
     <div class="result-nums">
       <div>Distance: {{ this.distance }} km</div>
     </div>
-    <button class="result-button" @click="this.resetMap()">Next</button>
+    <button class="result-button" @click="this.nextRound">Next</button>
   </div>
 </template>
 

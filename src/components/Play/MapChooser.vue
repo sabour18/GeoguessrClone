@@ -66,6 +66,7 @@
           return;
         }
 
+
         this.$emit('show-result', this.marker);
       }
     }

@@ -4,7 +4,7 @@
   export default {
     data() {
       return {
-        locations: []
+        panorama: null
       }
     },
     props: {
@@ -18,14 +18,24 @@
       const loader = new Loader(apiOptions);
 
       loader.load().then(() => {
-        this.displayMap();
+        this.initStreetView();
       });
 
     },
+    watch: {
+      actualLocation: {
+        handler(newLocation) {
+          if (this.panorama) {
+            this.panorama.setPosition(newLocation);
+          }
+        },
+        deep: true,
+      },
+    },
     methods: {
-      displayMap() {
+      initStreetView() {
         const mapOptions = {
-          position: this.actualLocation,  
+          position: this.actualLocation,
           pov: { heading: 165, pitch: 0 },
           zoomControlOptions: {
             position: google.maps.ControlPosition.LEFT_BOTTOM,
@@ -36,12 +46,12 @@
           addressControl: false,
           fullscreenControl: false,
           scaleControl: false,
-        }
+        };
 
         const mapDiv = document.getElementById("pano");
-        const map = new google.maps.StreetViewPanorama(mapDiv, mapOptions);
-            }
-    },
+        this.panorama = new google.maps.StreetViewPanorama(mapDiv, mapOptions);
+      },
+    }
   }
 </script>
 
