@@ -13,23 +13,23 @@
       return {
         actualLocation: null,
         guessLocation: null,
-        show: false
+        show: false,
+        rounds: 5,
+        choosenLocations: []
       }
     },
     emits: [
       'show-result',
     ],
     mounted() {
-      this.actualLocation = this.getRandomCords();
+      this.getRandomCords();
     },
     methods: {
       showResult(marker) {
         this.guessLocation = JSON.parse(JSON.stringify(marker.position));
 
         this.show = true;
-      },
-      // TODO: Get actual random locations. StreetViewService?
-      // TODO: Move getting random coordinates to utils folder
+      },//showResult
       getRandomCords() {
         const locations = [
           { lat: 60.1710018, lng: 24.939350, country: "Finland" },
@@ -41,15 +41,22 @@
           { lat: 29.976768, lng: 31.135538, country: "Egypt" },
           { lat: 40.757876, lng: -73.985592, country: "United States" },
         ];
+        const availableLocations = [...locations];
+        
+        for (let i = 0; i < this.rounds; i++) {
+          const randomIndex = Math.floor(Math.random() * availableLocations.length);
+          const [s] = availableLocations.splice(randomIndex, 1);
 
-        return locations[Math.floor(Math.random() * locations.length)];
-      },
+          this.choosenLocations.push(s);
+        }
+        console.log(this.choosenLocations[0]);
+      },//getRandomCords
     }
   }
 </script>
 
 <template>
-  <StreetView :actualLocation="this.actualLocation"/>
+  <StreetView :actualLocation="this.choosenLocations[0]"/>
   <MapChooser @show-result="showResult"/>
   <Result v-if="this.show" :actualLocation="this.actualLocation" :guessLocation="this.guessLocation"/>
 </template>
