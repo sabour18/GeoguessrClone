@@ -35,6 +35,7 @@
         // Generate locations after the map data is loaded
         this.getLocations();
         this.currentLocation = this.choosenLocations[this.currentRound];
+        console.log(this.currentLocation);
       } catch (error) {
         console.error('Failed to load map JSON:', error);
       }

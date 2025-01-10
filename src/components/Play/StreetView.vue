@@ -49,7 +49,10 @@
               position: google.maps.ControlPosition.LEFT_BOTTOM
             }
           }
-        ); 
+        );
+        setTimeout(() => {
+          streetView.setPosition(this.actualLocation);
+        }, 100);
       },//initStreetView
     }
   }
