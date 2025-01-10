@@ -33,12 +33,9 @@
         const mapOptions = {
           center: { lat: 0, lng: 0 },
           zoom: 1,
+          disableDefaultUI: true,
           clickableIcons: false,
-          disableDoubleClickZoom: true,
-          fullscreenControl: false,
-          streetViewControl: false,
-          zoomControl: false,
-          mapTypeControl: false,
+          zoomControl: true,
           draggableCursor: MouseCrosshair,
           draggingCursor: MouseCrosshair,
         };
