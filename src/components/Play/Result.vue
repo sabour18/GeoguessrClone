@@ -1,7 +1,7 @@
 <script>
   import { Loader } from '@googlemaps/js-api-loader';
-  import { calcDistance, calcScore } from "../../utils/helpers.js";
-
+  import { calcDistance, calcScore } from "@/utils/helpers.js";
+  import { roundResultOptions } from "@/utils/mapOptions.js";
 
   export default {
     data() {
@@ -9,12 +9,6 @@
         score: null,
         distance: null,
         markers: [],
-        mapOptions: {
-          center: { lat: 0, lng: 0 },
-          zoom: 1,
-          disableDefaultUI: true,
-          mapId: "DEMO_MAP_ID"
-        },
         line: null
       }
     },
@@ -30,21 +24,20 @@
       const loader = new Loader(apiOptions);
 
       loader.load().then(() => {
-        this.displayMap();
+        this.initRoundResultMap();
         this.distance = calcDistance(this.actualLocation, this.guessLocation);
         this.score = calcScore(this.distance);
       });
     },
     methods:{
-      async displayMap() {
-
+      async initRoundResultMap() {
         const mapDiv = document.getElementById("res");
-        this.map = new google.maps.Map(mapDiv, this.mapOptions);
+        this.map = new google.maps.Map(mapDiv, roundResultOptions);
 
         
         this.addMarkers();
         this.drawLine();
-      },//end
+      },//initRoundResultMap
       async addMarkers() {
         const { AdvancedMarkerElement } = await google.maps.importLibrary("marker");
 
@@ -63,7 +56,7 @@
           content: guessPin,
         });
         this.markers.push(guessMarker);
-      },//end
+      },//addMarkers
       drawLine() {
         const lineSymbol = {
           path: "M 0,-1 0,1",
@@ -87,10 +80,10 @@
           ],
           map: this.map
         });
-      },//end
+      },//drawLine
       nextRound() {
         this.$emit('next-round', this.score);
-      }
+      }//nextRound
     },
   }
 </script>

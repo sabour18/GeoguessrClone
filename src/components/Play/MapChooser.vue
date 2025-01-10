@@ -1,7 +1,7 @@
 <script scoped>
   import { Loader } from '@googlemaps/js-api-loader';
-  import MouseCrosshair from "@/assets/crosshair.png";
   import Result from '../Play/Result.vue'
+  import { guessOptions } from "@/utils/mapOptions.js";
 
   export default {
     data() {
@@ -19,36 +19,25 @@
       const loader = new Loader(apiOptions);
 
       loader.load().then(() => {
-        this.initMap();
+        this.initGuessMap();
       });
-
     },
     methods: {
-      initMap() {
+      initGuessMap() {
+        // Remove the previous guess marker
         if (this.marker) {
           this.marker.setMap(null);
           this.marker = null;
         }
 
-        const mapOptions = {
-          center: { lat: 0, lng: 0 },
-          zoom: 1,
-          disableDefaultUI: true,
-          clickableIcons: false,
-          zoomControl: true,
-          draggableCursor: MouseCrosshair,
-          draggingCursor: MouseCrosshair,
-        };
-
         const mapDiv = document.getElementById("map");
-        this.map = new google.maps.Map(mapDiv, mapOptions);
+        this.map = new google.maps.Map(mapDiv, guessOptions);
         this.map.addListener("click", (event) => {
           this.addMarker(event.latLng);
         });
 
         this.marker = null;
-
-      },
+      },//initGuessMap
       addMarker(location) {
         if (this.marker) {
           this.marker.setPosition(location);
@@ -59,7 +48,7 @@
           });
         }
         this.guessMade = true;
-      },
+      },//addMarker
       submitGuess(e) {
         e.preventDefault();
 
@@ -71,8 +60,8 @@
         this.$emit('show-result', this.marker);
 
         this.guessMade = false;
-        this.initMap();
-      }
+        this.initGuessMap();
+      }//submitGuess
     }
   }
 </script>

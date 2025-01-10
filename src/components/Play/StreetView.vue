@@ -1,10 +1,11 @@
 <script scoped>
   import { Loader } from '@googlemaps/js-api-loader';
+  import { streetViewOptions } from "@/utils/mapOptions.js";
 
   export default {
     data() {
       return {
-        panorama: null
+        streetViewMap: null
       }
     },
     props: {
@@ -25,8 +26,8 @@
     watch: {
       actualLocation: {
         handler(newLocation) {
-          if (this.panorama) {
-            this.panorama.setPosition(newLocation);
+          if (this.streetViewMap) {
+            this.streetViewMap.setPosition(newLocation);
           }
         },
         deep: true,
@@ -34,24 +35,22 @@
     },
     methods: {
       initStreetView() {
-        const mapOptions = {
-          position: this.actualLocation,
-          pov: { heading: 165, pitch: 0 },
-          zoomControlOptions: {
-            position: google.maps.ControlPosition.LEFT_BOTTOM,
-          },
-          panControlOptions: {
-            position: google.maps.ControlPosition.LEFT_BOTTOM,
-          },
-          addressControl: false,
-          fullscreenControl: false,
-          scaleControl: false,
-          showRoadLabels: false
-        };
-
         const mapDiv = document.getElementById("pano");
-        this.panorama = new google.maps.StreetViewPanorama(mapDiv, mapOptions);
-      },
+        this.streetViewMap = new google.maps.StreetViewPanorama(mapDiv, streetViewOptions);
+        this.streetViewMap.setOptions(
+          {
+            mapTypeControlOptions: {
+              position: this.actualLocation
+            },
+            zoomControlOptions: {
+              position: google.maps.ControlPosition.LEFT_BOTTOM
+            },
+            panControlOptions: {
+              position: google.maps.ControlPosition.LEFT_BOTTOM
+            }
+          }
+        ); 
+      },//initStreetView
     }
   }
 </script>

@@ -3,6 +3,8 @@
   import MapChooser from '../Play/MapChooser.vue'
   import Result from '../Play/Result.vue'
 
+
+
   export default {
     components: {
       StreetView,
@@ -26,8 +28,6 @@
     ],
     async mounted() {
       try {
-        console.log(this.$route.query);
-
         // Dynamically import the JSON map based on the route query parameter
         const mapFile = await import(`../../maps/${this.$route.query.mapId}.json`);
         this.mapJson = mapFile.customCoordinates;
@@ -70,8 +70,6 @@
 
         this.currentLocation = this.choosenLocations[this.currentRound];
         this.show = false;
-
-        console.log("It is round: " + this.currentRound);
       }//nextRound
     }
   }
