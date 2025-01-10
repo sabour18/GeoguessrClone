@@ -46,6 +46,7 @@
           addressControl: false,
           fullscreenControl: false,
           scaleControl: false,
+          showRoadLabels: false
         };
 
         const mapDiv = document.getElementById("pano");

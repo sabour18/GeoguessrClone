@@ -38,4 +38,3 @@ DONE:
 - calculate distance and score
 - ui showing round and score
 - can only make guess, id there is a marker guessed
-
