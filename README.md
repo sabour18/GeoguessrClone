@@ -1,6 +1,6 @@
 # map-picker
 
-Hello! This my trials and errors on creating a clone/similar project as GeoGuessr. The educational world location guesser.
+Hello! Welcome to the trial and errors of creating a clone/similar project as GeoGuessr. The educational world location guesser.
 
 ## Recommended IDE Setup
 
