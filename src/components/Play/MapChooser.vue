@@ -8,6 +8,7 @@
       return {
         map: null,
         marker: null,
+        guessMade: false
       }
     },
     async mounted() {
@@ -60,8 +61,7 @@
             map: this.map,
           });
         }
-
-        console.log("Marker placed at:", location.toString());
+        this.guessMade = true;
       },
       submitGuess(e) {
         e.preventDefault();
@@ -73,6 +73,7 @@
 
         this.$emit('show-result', this.marker);
 
+        this.guessMade = false;
         this.initMap();
       }
     }
@@ -83,7 +84,7 @@
   <div class="map-container">
     <div id="map"></div>
     <form class="submit-guess-form" @submit="submitGuess">
-      <button class="submit-btn">Make Guess</button>
+      <button class="guess-made"  :disabled="!this.guessMade" >Make Guess</button>
     </form>
   </div>
 </template>
@@ -132,24 +133,24 @@
     opacity: 1;
     width: 100%;
     height: 100%;
-    /*transform-origin: bottom right;
-    transform: scale(2);*/
   }
 
-  
+  .guess-made:disabled {
+    width: 100%;
+    color:black;
+    background-color: lightblue;
+    opacity: 0.3 !important;
+  }
 
-  .submit-btn {
+  .guess-made {
     background-color: #072047;
     color: white;
     width: 100%;
     margin-top: 10px;
-    opacity: 0.3;
   }
 
-  .map-container:hover .submit-btn {
+  .map-container:hover .guess-made {
     opacity: 1;
-    transform-origin: bottom right;
-    transform: scaleX(2);
   }
 
   .submit-guess-form {
