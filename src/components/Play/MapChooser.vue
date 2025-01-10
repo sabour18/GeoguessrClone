@@ -124,11 +124,19 @@
       cursor: crosshair !important;
     }
 
+  .map-container:hover {
+    height: 70vh;
+    width: 50vw;
+  }
   .map-container:hover #map {
     opacity: 1;
-    transform-origin: bottom right;
-    transform: scale(2);
+    width: 100%;
+    height: 100%;
+    /*transform-origin: bottom right;
+    transform: scale(2);*/
   }
+
+  
 
   .submit-btn {
     background-color: #072047;
