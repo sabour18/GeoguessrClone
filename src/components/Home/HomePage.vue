@@ -13,7 +13,7 @@
   <div class="welcome-menu">
     <h1 class="welcome">Welcome to MapPicker!</h1>
     <div class="button-group">
-      <form action="/Play">
+      <form action="/PlayConfig">
         <button type="submit">Play</button>
       </form>
       <form action="#">
@@ -46,4 +46,6 @@
     flex-wrap: wrap;
     gap: 20px;
   }
+
+
 </style>

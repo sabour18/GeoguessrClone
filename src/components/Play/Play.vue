@@ -1,5 +1,4 @@
 <script>
-  import json from '../../maps/canada.json'
   import StreetView from '../Play/StreetView.vue'
   import MapChooser from '../Play/MapChooser.vue'
   import Result from '../Play/Result.vue'
@@ -12,7 +11,7 @@
     },
     data() {
       return {
-        mapJson: json.customCoordinates,
+        mapJson: null,
         currentLocation: null,
         guessLocation: null,
         show: false,
@@ -25,10 +24,20 @@
     emits: [
       'show-result',
     ],
-    mounted() {
-      console.log(this.mapJson);
-      this.getLocations();
-      this.currentLocation = this.choosenLocations[this.currentRound];
+    async mounted() {
+      try {
+        console.log(this.$route.query);
+
+        // Dynamically import the JSON map based on the route query parameter
+        const mapFile = await import(`../../maps/${this.$route.query.mapId}.json`);
+        this.mapJson = mapFile.customCoordinates;
+
+        // Generate locations after the map data is loaded
+        this.getLocations();
+        this.currentLocation = this.choosenLocations[this.currentRound];
+      } catch (error) {
+        console.error('Failed to load map JSON:', error);
+      }
     },
     methods: {
       showResult(marker) {
@@ -46,8 +55,6 @@
           }
           indexes.push(randIndex);
         }
-
-        console.log("These are the final indexes: " + indexes);
 
         for (let i = 0; i < indexes.length; i++) {
           this.choosenLocations.push(this.mapJson[indexes[i]]);

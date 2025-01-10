@@ -1,16 +1,24 @@
 
 import { createRouter, createWebHistory } from 'vue-router'
 import HomePage from './../components/Home/HomePage.vue'
-import PlaySettings from './../components/Play/PlaySettings.vue'
+import Play from '../components/Play/Play.vue'
+import PlaySettings from '../components/Configuration/PlayConfig.vue'
 
 const routes = [
   {
     path: '/',
-    component: HomePage
+    component: HomePage,
+    name: 'home'
   },
   {
     path: '/Play',
-    component: PlaySettings
+    component: Play,
+    name: 'play'
+  },
+  {
+    path: '/PlayConfig',
+    component: PlaySettings,
+    name: 'config'
   },
 ];
 
