@@ -1,17 +1,41 @@
 
 
+TODO:
+- Have only 1 map initilized for each, street view, guesser, and result
+	- and just change the map location each round
+- Add sound when make a guess
+- change point calculation formula
+- Final Results screen, that shows final score
+- Add different maps
+	- Important world locations
+	- Random Official World
+- Change the guess markers
+- Change styling on distance and score on round result screen
+- change zoom on round result map
+- rename result files and vars to roundResult
+- streetview, remove road name option
 
-- ! CHANGE FROM GOOGLE MAPS API TO SOMETHING ELSE
-	- Already racked up quite a bill just from testing
+- Look into ways to change how config loads into play, and passes the config params
+- Add an optional timer to config screen
+- Add option to how many rounds to play on config screen
 
-- Find way to make clicker map bigger when hovered
-	-Maybe streetViewService
-- Grey out make guess button, until a marker is placed
-- Play 5 games when quick play selected
-- Get new street view locations differently
-- Add Game logic file
-- Add settings screen
+
 
 DONE:
 - Calculate distance between the 2 points
 - Draw line between guess and actual location
+- Grey out make guess button, until a marker is placed
+- Add a config/settings/options screen
+- Play 5 games when quick play selected
+- Find way to make clicker map bigger when hovered
+- Get new street view locations differently
+- Add Game logic file
+- Add settings screen
+- Add new locations
+- Streetview
+- guess map
+- result map
+- calculate distance and score
+- ui showing round and score
+- can only make guess, id there is a marker guessed
+
