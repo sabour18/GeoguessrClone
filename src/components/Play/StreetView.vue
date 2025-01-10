@@ -72,8 +72,8 @@
   #pano {
     margin: auto;
     position: relative;
-    width: 98vw;
-    height: 98vh;
+    width: 100vw;
+    height: 100vh;
     overflow: hidden;
   }
 </style>
