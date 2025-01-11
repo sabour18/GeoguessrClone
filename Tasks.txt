@@ -17,7 +17,7 @@ TODO:
 
 - Look into ways to change how config loads into play, and passes the config params
 - Add an optional timer to config screen
-- Add option to how many rounds to play on config screen
+- Add option to how many rounds to play on  config screen
 
 
 

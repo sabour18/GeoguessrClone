@@ -50,6 +50,7 @@
             }
           }
         );
+        //TODO: ??
         setTimeout(() => {
           streetView.setPosition(this.actualLocation);
         }, 100);
