@@ -1,6 +1,6 @@
 # map-picker
 
-This template should help get you started developing with Vue 3 in Vite.
+Hello! Welcome to the trial and errors of creating a clone/similar project as GeoGuessr. The educational world location guesser.
 
 ## Recommended IDE Setup
 
