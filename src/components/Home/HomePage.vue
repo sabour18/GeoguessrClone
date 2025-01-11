@@ -16,9 +16,6 @@
       <form action="/PlayConfig">
         <button type="submit">Play</button>
       </form>
-      <form action="#">
-        <button type="submit">Thing 2</button>
-      </form>
     </div>
   </div>
 </template>
