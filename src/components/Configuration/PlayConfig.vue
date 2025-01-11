@@ -39,13 +39,14 @@
   <div class="config-container">
     <h1>Game Configuration</h1>
     <hr class="solid">
+    <h3>Select amount of rounds:</h3>
+    <button class="rounds-5">5</button>
     <h3>Choose a Map:</h3>
     <div class="btn-group">
-      <button v-for="map in this.availableMaps"            
+      <button v-for="map in this.availableMaps"
               :key="map.mapId"
-              :class="{ selected: selectedMap === map.mapId }"            
-              @click="selectMap(map)"
-      >
+              :class="{ selected: selectedMap === map.mapId }"
+              @click="selectMap(map)">
         {{map.text}}
       </button>
     </div>
@@ -85,6 +86,11 @@
 
   .selected {
     color: white;
+    background: rgb(7,32,71,0.85);
+  }
+
+  .rounds-5 {
+      color:white;
     background: rgb(7,32,71,0.85);
   }
 </style>
