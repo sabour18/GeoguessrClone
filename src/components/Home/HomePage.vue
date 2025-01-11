@@ -11,7 +11,7 @@
 <template>
   <Header />
   <div class="welcome-menu">
-    <h1 class="welcome">Welcome to MapPicker!</h1>
+    <h1 class="welcome">Welcome to my Geoguessr Clone!</h1>
     <div class="button-group">
       <form action="/PlayConfig">
         <button type="submit">Play</button>
