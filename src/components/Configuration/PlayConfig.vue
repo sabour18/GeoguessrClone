@@ -36,8 +36,8 @@
 <template>
   <Header />
 
-  <div class="settings-container">
-    <h1>Setttings</h1>
+  <div class="config-container">
+    <h1>Game Configuration</h1>
     <hr class="solid">
     <h3>Choose a Map:</h3>
     <div class="btn-group">
@@ -62,8 +62,8 @@
     margin: 20px;
   }
 
-  .settings-container {
-    margin-top:5%;
+  .config-container {
+    margin-top: 5%;
     width: 100%;
     height: 100%;
     display: flex;
