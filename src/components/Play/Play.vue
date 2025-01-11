@@ -103,5 +103,6 @@
     align-items: center;
     background: rgb(7,32,71,0.85);
     color: white;
+    border-bottom-right-radius: 10px;
   }
 </style>
