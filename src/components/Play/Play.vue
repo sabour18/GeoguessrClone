@@ -2,6 +2,7 @@
   import StreetView from '../Play/StreetView.vue'
   import MapChooser from '../Play/MapChooser.vue'
   import Result from '../Play/Result.vue'
+  import ExitGame from '../Play/ExitGame.vue'
 
 
 
@@ -9,7 +10,8 @@
     components: {
       StreetView,
       MapChooser,
-      Result
+      Result,
+      ExitGame
     },
     data() {
       return {
@@ -84,6 +86,7 @@
   <div>Round: {{this.currentRound+1}}/{{this.rounds}}</div>
   <div>Score: {{this.totalScore}}pts</div>
 </div>
+  <ExitGame></ExitGame>
 </template>
 
 <style>
@@ -100,5 +103,6 @@
     align-items: center;
     background: rgb(7,32,71,0.85);
     color: white;
+    border-bottom-right-radius: 10px;
   }
 </style>

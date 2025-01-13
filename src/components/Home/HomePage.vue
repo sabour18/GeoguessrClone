@@ -11,13 +11,11 @@
 <template>
   <Header />
   <div class="welcome-menu">
-    <h1 class="welcome">Welcome to MapPicker!</h1>
+    <h1 class="welcome">Welcome to my Geoguessr Clone!</h1>
+    <p>Click play and select the map to start playing!</p>
     <div class="button-group">
       <form action="/PlayConfig">
         <button type="submit">Play</button>
-      </form>
-      <form action="#">
-        <button type="submit">Thing 2</button>
       </form>
     </div>
   </div>
@@ -34,7 +32,7 @@
 
   .welcome{
       text-align:center;
-      padding-bottom:50px;
+      padding-bottom:10px;
       color:white;
       font-size:3rem;
   }
@@ -47,5 +45,7 @@
     gap: 20px;
   }
 
-
+  p{
+      margin-bottom:20px;
+  }
 </style>
