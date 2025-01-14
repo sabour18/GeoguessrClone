@@ -52,6 +52,10 @@
             }
           }
         );
+
+        setTimeout(() => {
+          this.streetViewMap.setPosition(this.actualLocation);
+        }, 100);
       },//initStreetView
     }
   }
