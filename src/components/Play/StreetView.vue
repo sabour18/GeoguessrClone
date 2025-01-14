@@ -19,7 +19,9 @@
       const loader = new Loader(apiOptions);
 
       loader.load().then(() => {
-        this.initStreetView();
+        if (this.actualLocation) {
+          this.initStreetView();
+        }
       });
 
     },
@@ -50,10 +52,6 @@
             }
           }
         );
-        //TODO: ??
-        setTimeout(() => {
-          streetView.setPosition(this.actualLocation);
-        }, 100);
       },//initStreetView
     }
   }
