@@ -14,6 +14,7 @@
         { text: 'Famous Locations', mapId: 'FamousLocations'},
         { text: 'World Cities', mapId: 'cities'},
         { text: 'Funny/Cool Locations', mapId: 'FunnyCool'},
+        { text: 'Personal Locations', mapId: 'personal'},
       ],
       selectedMap: null,
     }  
