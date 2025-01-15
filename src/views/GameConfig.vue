@@ -18,12 +18,6 @@
         { name: 'Famous Locations', mapId: 'FamousLocations'},
         { name: 'World Cities', mapId: 'cities'},
         { name: 'Funny/Cool Locations', mapId: 'FunnyCool'},
-        { name: 'Funny/Cool Locations', mapId: 'FunnyCool'},
-        { name: 'Funny/Cool Locations', mapId: 'FunnyCool'},
-        { name: 'Funny/Cool Locations', mapId: 'FunnyCool'},
-        { name: 'Funny/Cool Locations', mapId: 'FunnyCool'},
-        { name: 'Funny/Cool Locations', mapId: 'FunnyCool'},
-        { name: 'Funny/Cool Locations', mapId: 'FunnyCool'},
       ],
       selectedMap: null,
     }
@@ -62,6 +56,7 @@
                  v-for="map in this.availableMaps"
                  :name="map.name"
                  :mapId="map.mapId"
+                 :selected="map.mapId === this.selectedMap"
                  @select-map="selectMap"
                  />
       </div>
