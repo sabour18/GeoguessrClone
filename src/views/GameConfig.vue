@@ -1,5 +1,5 @@
 <script>
-  import Header from '../shared/Header.vue'
+  import Header from '@/components/shared/TheHeader.vue'
 
   export default {
   components: {
@@ -15,7 +15,7 @@
         { text: 'Funny/Cool Locations', mapId: 'FunnyCool'},
       ],
       selectedMap: null,
-    }  
+    }
   },
   methods: {
     selectMap(map) {
@@ -55,11 +55,11 @@
 </template>
 
 <style scoped>
-  hr{
-    width:80%;
+  hr {
+    width: 80%;
   }
 
-  h3{
+  h3 {
     margin: 20px;
   }
 
@@ -72,6 +72,7 @@
     justify-content: center;
     align-items: center;
   }
+
   .btn-group {
     margin: 5px;
     width: 80%;
@@ -80,7 +81,7 @@
     align-items: center;
   }
 
-  button{
+  button {
     margin: 10px;
   }
 
@@ -90,7 +91,7 @@
   }
 
   .rounds-5 {
-      color:white;
+    color: white;
     background: rgb(7,32,71,0.85);
   }
 </style>

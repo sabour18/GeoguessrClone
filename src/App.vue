@@ -1,7 +1,5 @@
 <script setup>
-
-  import Home from './components/Home/HomePage.vue'
-  import Header from './components/shared/Header.vue'
+  import HomePage from '@/views/Home.vue'
 </script>
 
 <template>

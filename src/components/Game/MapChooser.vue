@@ -1,6 +1,6 @@
 <script scoped>
   import { Loader } from '@googlemaps/js-api-loader';
-  import Result from '../Play/Result.vue'
+  import Result from '@/components/Game/Result.vue'
   import { guessOptions } from "@/utils/mapOptions.js";
 
   export default {

@@ -1,8 +1,8 @@
 <script>
-  import StreetView from '../Play/StreetView.vue'
-  import MapChooser from '../Play/MapChooser.vue'
-  import Result from '../Play/Result.vue'
-  import ExitGame from '../Play/ExitGame.vue'
+  import StreetView from '@/components/Game/StreetView.vue'
+  import MapChooser from '@/components/Game/MapChooser.vue'
+  import Result from '@/components/Game/Result.vue'
+  import ExitGame from '@/components/Game/ExitGame.vue'
 
 
 
@@ -31,7 +31,7 @@
     async mounted() {
       try {
         // Dynamically import the JSON map based on the route query parameter
-        const mapFile = await import(`../../maps/${this.$route.query.mapId}.json`);
+        const mapFile = await import(`@/maps/${this.$route.query.mapId}.json`);
         this.mapJson = mapFile.customCoordinates;
 
         // Generate locations after the map data is loaded
