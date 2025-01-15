@@ -6,29 +6,31 @@
   components: {
     Header,
     MapCard,
-  },
+    },
+    emits: [
+      'select-map',
+    ],
   data(){
     return{
       availableMaps: [
-        { text: 'Canada', mapId: 'Canada'},
-        { text: 'Canada Vancouver Island', mapId: 'CanadaVI'},
-        { text: 'Famous Locations', mapId: 'FamousLocations'},
-        { text: 'World Cities', mapId: 'cities'},
-        { text: 'Funny/Cool Locations', mapId: 'FunnyCool'},
-        { text: 'Funny/Cool Locations', mapId: 'FunnyCool'},
-        { text: 'Funny/Cool Locations', mapId: 'FunnyCool'},
-        { text: 'Funny/Cool Locations', mapId: 'FunnyCool'},
-        { text: 'Funny/Cool Locations', mapId: 'FunnyCool'},
-        { text: 'Funny/Cool Locations', mapId: 'FunnyCool'},
-        { text: 'Funny/Cool Locations', mapId: 'FunnyCool'},
-        { text: 'Funny/Cool Locations', mapId: 'FunnyCool'},
+        { name: 'Canada', mapId: 'Canada'},
+        { name: 'Canada Vancouver Island', mapId: 'CanadaVI'},
+        { name: 'Famous Locations', mapId: 'FamousLocations'},
+        { name: 'World Cities', mapId: 'cities'},
+        { name: 'Funny/Cool Locations', mapId: 'FunnyCool'},
+        { name: 'Funny/Cool Locations', mapId: 'FunnyCool'},
+        { name: 'Funny/Cool Locations', mapId: 'FunnyCool'},
+        { name: 'Funny/Cool Locations', mapId: 'FunnyCool'},
+        { name: 'Funny/Cool Locations', mapId: 'FunnyCool'},
+        { name: 'Funny/Cool Locations', mapId: 'FunnyCool'},
+        { name: 'Funny/Cool Locations', mapId: 'FunnyCool'},
       ],
       selectedMap: null,
     }
   },
   methods: {
-    selectMap(map) {
-      this.selectedMap = map.mapId;
+    selectMap(mapId) {
+      this.selectedMap = mapId;
     },//selectMap
     startGame(){
       if (!this.selectedMap) {
@@ -56,14 +58,19 @@
     <div class="map-container">
       <h3>Select a Map:</h3>
       <div class="map-list">
-        <MapCard class="map-card" v-for="map in this.availableMaps"/>
+        <MapCard class="map-card"
+                 v-for="map in this.availableMaps"
+                 :name="map.name"
+                 :mapId="map.mapId"
+                 @select-map="selectMap"
+                 />
       </div>
       <!--<div class="btn-group">
         <button v-for="map in this.availableMaps"
                 :key="map.mapId"
                 :class="{ selected: selectedMap === map.mapId }"
                 @click="selectMap(map)">
-          {{map.text}}
+          {{map.name}}
         </button>
       </div>-->
     </div>

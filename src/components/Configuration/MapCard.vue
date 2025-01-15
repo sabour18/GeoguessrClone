@@ -1,13 +1,23 @@
 <script>
-
+  export default {
+    props: {
+      name: String,
+      mapId: String
+    },
+    methods: {
+      selectMap() {
+        this.$emit('select-map', this.mapId);
+      }//selectMap
+    }
+  }
 </script>
 
 <template>
-  <div class="card-container">
+  <div class="card-container" @click="selectMap">
     <div class="card-image">
       <img/>
     </div>
-    <p>This is a map</p>
+    <h3>{{this.name}}</h3>
   </div>
 </template>
 
