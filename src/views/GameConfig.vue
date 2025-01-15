@@ -40,15 +40,12 @@
 
 <template>
   <Header />
-
   <div class="config-container">
 
     <div class="title">
       <h1>Game Configuration</h1>
       <hr/>
     </div>
-
-
     <div class="map-container">
       <h3>Select a Map:</h3>
       <div class="map-list">
@@ -60,19 +57,12 @@
                  @select-map="selectMap"
                  />
       </div>
-      <!--<div class="btn-group">
-        <button v-for="map in this.availableMaps"
-                :key="map.mapId"
-                :class="{ selected: selectedMap === map.mapId }"
-                @click="selectMap(map)">
-          {{map.name}}
-        </button>
-      </div>-->
+    </div>
+    <div class="round-container">
+      <h3>Select amount of rounds:</h3>
+      <button class="rounds-5">5</button>
     </div>
     
-
-    <h3>Select amount of rounds:</h3>
-    <button class="rounds-5">5</button>
 
     <button @click="startGame">Start</button>
   </div>
@@ -93,12 +83,8 @@
     margin:auto;
   }
 
-  h3 {
-    margin: 20px;
-  }
-
   .config-container {
-    margin-top: 5%;
+    margin-top: 15px;
     width: 100%;
     height: 100%;
     display: flex;
@@ -124,13 +110,9 @@
     background: rgb(7,32,71,0.85);
   }
 
-  .rounds-5 {
-    color: white;
-    background: rgb(7,32,71,0.85);
-  }
-
   /* Map Card Section */
   .map-container {
+    margin-top: 40px;
     width: 80%;
   }
 
@@ -144,4 +126,21 @@
   .map-card{
     margin: 15px 20px 15px 20px;
   }
+
+  /* Round selection section*/
+  .round-container{
+      margin-top: 40px;
+      display: flex;
+      flex-direction:column;
+  }
+
+  .round-container h3 {
+    margin: 10px;
+  }
+
+  .rounds-5 {
+    color: white;
+    background: rgb(7,32,71,0.85);
+  }
+
 </style>
