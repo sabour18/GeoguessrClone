@@ -1,21 +1,12 @@
 
 
 TODO:
-- Have only 1 map initilized for each, street view, guesser, and result
-	- and just change the map location each round
+
 - Add sound when make a guess
 - change point calculation formula
 - Final Results screen, that shows final score
-- Add different maps
-	- Important world locations
-	- Random Official World
 - Change the guess markers
 - Change styling on distance and score on round result screen
-- change zoom on round result map
-- rename result files and vars to roundResult
-- streetview, remove road name option
-
-- Look into ways to change how config loads into play, and passes the config params
 - Add an optional timer to config screen
 - Add option to how many rounds to play on  config screen
 
@@ -39,3 +30,13 @@ DONE:
 - ui showing round and score
 - can only make guess, id there is a marker guessed
 - test pull request
+- Look into ways to change how config loads into play, and passes the config params
+	- pinia
+- streetview, remove road name option
+- rename result files and vars to roundResult
+- change zoom on round result map
+- Add different maps
+	- Important world locations
+	- Random Official World
+- Have only 1 map initilized for each, street view, guesser, and result
+	- and just change the map location each round
