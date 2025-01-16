@@ -49,7 +49,6 @@ const useGameStore = defineStore('game', {
         // Dynamically import the JSON map based on the route query parameter
         const mapFile = await import(`@/maps/${this.selectedMap}.json`);
         this.mapJson = mapFile.customCoordinates;
-
         // Generate locations after the map data is loaded
         const indexes = [];
         // get 5 random indexes, cant be duplicates
@@ -61,9 +60,7 @@ const useGameStore = defineStore('game', {
           indexes.push(randIndex);
         }
 
-        for (let i = 0; i < indexes.length; i++) {
-          this.locations.push(this.mapJson[indexes[i]]);
-        }
+        this.locations = indexes.map((index) => this.mapJson[index]);
 
         this.currentLocation = this.locations[this.currentRound-1];
       } catch (error) {
