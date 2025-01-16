@@ -10,6 +10,15 @@ const useGameStore = defineStore('game', {
     currentLocation: null,
     currentScore: 0,
   }),
+  persist: {
+    enabled: true,
+    strategies: [
+      {
+        key: 'game-store',
+        storage: localStorage,
+      },
+    ],
+  },
   actions: {
     async startTheGame(map) {
   return new Promise((resolve) => {
