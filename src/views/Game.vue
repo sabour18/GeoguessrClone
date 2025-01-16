@@ -4,6 +4,8 @@
   import Result from '@/components/Game/Result.vue'
   import ExitGame from '@/components/Game/ExitGame.vue'
 
+  import useGameStore from '@/stores/store'
+  import { mapState, mapActions } from 'pinia';
 
 
   export default {
@@ -13,65 +15,33 @@
       Result,
       ExitGame
     },
+    computed: {
+      ...mapState(useGameStore, ['isPlayingGame', 'totalRounds', 'currentRound', 'currentScore', 'currentLocation', 'locations']), // Map store states
+    },
     data() {
       return {
         mapJson: null,
-        currentLocation: null,
         guessLocation: null,
         show: false,
-        rounds: 5,
-        currentRound: 0,
-        choosenLocations: [],
-        totalScore: 0
       }
     },
     emits: [
       'show-result',
     ],
-    async mounted() {
-      try {
-        // Dynamically import the JSON map based on the route query parameter
-        const mapFile = await import(`@/maps/${this.$route.query.mapId}.json`);
-        this.mapJson = mapFile.customCoordinates;
-
-        // Generate locations after the map data is loaded
-        this.getLocations();
-        this.currentLocation = this.choosenLocations[this.currentRound];
-        console.log(this.currentLocation);
-      } catch (error) {
-        console.error('Failed to load map JSON:', error);
-      }
-    },
     methods: {
+      ...mapActions(useGameStore, ['setTotalRounds', 'goToNextRound']), // Map store actions
       showResult(marker) {
         this.guessLocation = JSON.parse(JSON.stringify(marker.position));
 
         this.show = true;
       },//showResult
-      getLocations() {
-        const indexes = [];
-
-        for (let i = 0; i < this.rounds; i++) {
-          let randIndex = Math.floor(Math.random() * this.mapJson.length);
-          while (indexes.includes(randIndex)) {
-            randIndex = Math.floor(Math.random() * this.mapJson.length);
-          }
-          indexes.push(randIndex);
-        }
-
-        for (let i = 0; i < indexes.length; i++) {
-          this.choosenLocations.push(this.mapJson[indexes[i]]);
-        }
-      },//getLocations
       nextRound(score) {
-        this.totalScore += score;
-        this.currentRound++;
+        this.goToNextRound(score);
 
-        if (this.currentRound == this.rounds) {
+        if (this.currentRound == this.totalRounds) {
           this.$router.push('/');
         }
 
-        this.currentLocation = this.choosenLocations[this.currentRound];
         this.show = false;
       }//nextRound
     }
@@ -79,12 +49,12 @@
 </script>
 
 <template>
-  <StreetView :actualLocation="this.currentLocation"/>
+  <StreetView/>
   <MapChooser @show-result="showResult"/>
   <Result v-if="this.show" @nextRound="nextRound" :actualLocation="this.currentLocation" :guessLocation="this.guessLocation"/>
 <div class="ui">
-  <div>Round: {{this.currentRound+1}}/{{this.rounds}}</div>
-  <div>Score: {{this.totalScore}}pts</div>
+  <div>Round: {{this.currentRound}}/{{this.totalRounds}}</div>
+  <div>Score: {{this.currentScore}}pts</div>
 </div>
   <ExitGame></ExitGame>
 </template>

@@ -1,6 +1,8 @@
 <script>
   import Header from '@/components/shared/TheHeader.vue'
   import MapCard from '@/components/Configuration/MapCard.vue'
+  import useGameStore from '@/stores/store'
+  import { mapState, mapActions } from 'pinia';
 
   export default {
   components: {
@@ -10,6 +12,9 @@
     emits: [
       'select-map',
     ],
+    computed: {
+      ...mapState(useGameStore, ['isPlayingGame', 'totalRounds', 'currentRound']), // Map store states
+    },
   data(){
     return{
       availableMaps: [
@@ -20,19 +25,26 @@
         { name: 'Funny/Cool Locations', mapId: 'FunnyCool'},
       ],
       selectedMap: null,
+      selectedRounds: 5,
     }
   },
-  methods: {
+    methods: {
+      ...mapActions(useGameStore, ['startTheGame','setTotalRounds', 'goToNextRound', 'setTotalRounds', 'setLocations']), // Map store actions
     selectMap(mapId) {
       this.selectedMap = mapId;
     },//selectMap
-    startGame(){
+    selectRounds() {
+      this.selectedRounds = 5;
+    },//selectRounds
+    async startGame(){
       if (!this.selectedMap) {
         alert('Please select a map before starting the game!');
         return;
       }
+      await this.startTheGame(this.selectedMap);
+      await this.setLocations();
 
-      this.$router.push({ name: 'play', query: { mapId: this.selectedMap } });
+      this.$router.push({ name: 'play'});
     }//startGame
   }
 }
@@ -60,7 +72,7 @@
     </div>
     <div class="round-container">
       <h3>Select amount of rounds:</h3>
-      <button class="rounds-5">5</button>
+      <button class="rounds-5" @click="selectRounds">5</button>
     </div>
     
 

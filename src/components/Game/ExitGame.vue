@@ -1,10 +1,19 @@
 <script>
+  import { mapState, mapActions } from 'pinia';
+  import useGameStore from '@/stores/store'
 
+  export default {
+    computed: {
+    },
+    methods: {
+      ...mapActions(useGameStore, ['exitGame']), // Map store actions
+    }
+  }
 </script>
 
 <template>
   <div class="exit">
-    <a href="/">X</a>
+    <a href="/" @click="exitGame">X</a>
   </div>
 </template>
 

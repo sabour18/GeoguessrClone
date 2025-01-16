@@ -2,14 +2,17 @@
   import { Loader } from '@googlemaps/js-api-loader';
   import { streetViewOptions } from "@/utils/mapOptions.js";
 
+  import useGameStore from '@/stores/store'
+  import { mapState, mapActions } from 'pinia';
+
   export default {
     data() {
       return {
         streetViewMap: null
       }
     },
-    props: {
-      actualLocation: Object,
+    computed: {
+      ...mapState(useGameStore, ['currentLocation']), // Map store states
     },
     async mounted() {
       const apiOptions = {
@@ -19,14 +22,14 @@
       const loader = new Loader(apiOptions);
 
       loader.load().then(() => {
-        if (this.actualLocation) {
+        if (this.currentLocation) {
           this.initStreetView();
         }
       });
 
     },
     watch: {
-      actualLocation: {
+      currentLocation: {
         handler(newLocation) {
           if (this.streetViewMap) {
             this.streetViewMap.setPosition(newLocation);
@@ -42,7 +45,7 @@
         this.streetViewMap.setOptions(
           {
             mapTypeControlOptions: {
-              position: this.actualLocation
+              position: this.currentLocation
             },
             zoomControlOptions: {
               position: google.maps.ControlPosition.LEFT_BOTTOM
@@ -54,7 +57,7 @@
         );
 
         setTimeout(() => {
-          this.streetViewMap.setPosition(this.actualLocation);
+          this.streetViewMap.setPosition(this.currentLocation);
         }, 100);
       },//initStreetView
     }
