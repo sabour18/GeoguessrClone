@@ -23,6 +23,7 @@
         { name: 'Famous Locations', mapId: 'FamousLocations'},
         { name: 'World Cities', mapId: 'cities'},
         { name: 'Funny/Cool Locations', mapId: 'FunnyCool'},
+        { name: 'Personal Locations', mapId: 'Personal'},
       ],
       selectedMap: null,
       selectedRounds: 5,
