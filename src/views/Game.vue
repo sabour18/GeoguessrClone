@@ -38,7 +38,7 @@
       nextRound(score) {
         this.goToNextRound(score);
 
-        if (this.currentRound == this.totalRounds) {
+        if (this.currentRound > this.totalRounds) {
           this.$router.push('/');
         }
 
