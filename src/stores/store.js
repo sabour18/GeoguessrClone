@@ -21,7 +21,8 @@ const useGameStore = defineStore('game', {
   },
   actions: {
     async startTheGame(map) {
-  return new Promise((resolve) => {
+      return new Promise((resolve) => {
+    this.currentScore = 0;
     this.selectedMap = map;
     this.totalRounds = 5;
     this.currentRound = 1;
