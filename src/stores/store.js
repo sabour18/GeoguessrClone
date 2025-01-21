@@ -26,7 +26,8 @@ const useGameStore = defineStore('game', {
     this.selectedMap = map;
     this.totalRounds = 5;
     this.currentRound = 1;
-    this.isPlayingGame = true;
+        this.isPlayingGame = true;
+        console.log(this.currentLocation);
     resolve(); // Simulate async completion
   });
 },
@@ -34,7 +35,7 @@ const useGameStore = defineStore('game', {
       this.currentScore += score;
       this.currentRound += 1;
       this.currentLocation = this.locations[this.currentRound - 1];
-      console.log(this.locations);
+      console.log(this.currentLocation);
     },
     setTotalRounds(rounds) {
       this.totalRounds = rounds;

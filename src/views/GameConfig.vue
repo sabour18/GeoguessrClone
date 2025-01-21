@@ -21,7 +21,7 @@
         { name: 'Canada', mapId: 'Canada'},
         { name: 'Canada Vancouver Island', mapId: 'CanadaVI'},
         { name: 'Famous Locations', mapId: 'FamousLocations'},
-        { name: 'World Cities', mapId: 'cities'},
+        { name: 'World Cities', mapId: 'citiesp'},
         { name: 'Funny/Cool Locations', mapId: 'FunnyCool'},
         { name: 'Personal Locations', mapId: 'Personal'},
       ],
