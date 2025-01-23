@@ -34,12 +34,14 @@
           if (this.streetViewMap) {
             this.streetViewMap.setPosition(newLocation);
           }
+          console.log(this.currentLocation)
         },
         deep: true,
       },
     },
     methods: {
       initStreetView() {
+        console.log(this.currentLocation)
         const mapDiv = document.getElementById("pano");
         this.streetViewMap = new google.maps.StreetViewPanorama(mapDiv, streetViewOptions);
         this.streetViewMap.setOptions(
