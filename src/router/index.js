@@ -23,8 +23,8 @@ const routes = [
 ];
 
 const router = createRouter({
-  history: createWebHistory(),
-  routes: routes
-})
+  history: createWebHistory('/GeoguessrClone/'),
+  routes: routes,
+});
 
 export default router;
