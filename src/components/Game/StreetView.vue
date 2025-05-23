@@ -29,39 +29,34 @@
 
     },
     watch: {
-      currentLocation: {
-        handler(newLocation) {
-          if (this.streetViewMap) {
-            this.streetViewMap.setPosition(newLocation);
-          }
-          console.log(this.currentLocation)
-        },
-        deep: true,
-      },
+      currentLocation(newLocation) {
+        this.updateStreetView();
+      }
     },
     methods: {
       initStreetView() {
-        console.log(this.currentLocation)
         const mapDiv = document.getElementById("pano");
         this.streetViewMap = new google.maps.StreetViewPanorama(mapDiv, streetViewOptions);
         this.streetViewMap.setOptions(
           {
-            mapTypeControlOptions: {
-              position: this.currentLocation
-            },
-            zoomControlOptions: {
-              position: google.maps.ControlPosition.LEFT_BOTTOM
-            },
-            panControlOptions: {
-              position: google.maps.ControlPosition.LEFT_BOTTOM
-            }
+            mapTypeControlOptions: { position: google.maps.ControlPosition.TOP_RIGHT },
+            zoomControlOptions: { position: google.maps.ControlPosition.LEFT_BOTTOM },
+            panControlOptions: { position: google.maps.ControlPosition.LEFT_BOTTOM },
           }
         );
-
-        setTimeout(() => {
           this.streetViewMap.setPosition(this.currentLocation);
-        }, 100);
       },//initStreetView
+      destroyStreetView() {
+        if (this.streetViewMap) {
+          const panoDiv = document.getElementById('pano');
+          panoDiv.innerHTML = '';
+          this.streetViewMap = null;
+        }
+      },//destroyStreetView
+      updateStreetView() {
+        this.destroyStreetView();
+        this.initStreetView();
+      },//updateStreetView
     }
   }
 </script>
