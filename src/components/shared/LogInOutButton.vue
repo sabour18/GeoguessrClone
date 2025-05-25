@@ -35,7 +35,7 @@
 
 <template>
   <div class="log-btn" @click="handleClick">
-    {{ isLoggedIn ? `Logout (${userStore.username})` : 'Login' }}
+    {{ isLoggedIn ? `Logout` : 'Login' }}
   </div>
 
   <LoginModal v-if="showModal" @close="showModal = false" />

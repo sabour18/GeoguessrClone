@@ -1,11 +1,20 @@
 <script >
   import TheHeader from '@/components/shared/TheHeader.vue'
   import TheFooter from '@/components/shared/TheFooter.vue'
+  import { useUserStore } from '@/stores/userStore';
 
   export default {
     components: {
       TheHeader,
       TheFooter,
+    },
+    computed: {
+      userStore() {
+        return useUserStore();
+      },
+      isLoggedIn() {
+        return this.userStore.isLoggedIn;
+      },
     }
   }
 </script>
@@ -13,7 +22,7 @@
 <template>
   <TheHeader />
   <div class="welcome-menu">
-    <h1 class="welcome">Welcome to my Geoguessr Clone!</h1>
+    <h1 class="welcome">Welcome {{ isLoggedIn ? `${userStore.username}` : '' }} to my Geoguessr Clone!</h1>
     <p>Click play and select the map to start playing!</p>
     <div class="button-group">
       <form action="/GameConfig">

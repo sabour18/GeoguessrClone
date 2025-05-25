@@ -12,8 +12,6 @@ export const useUserStore = defineStore('user', {
     setUser(token, username) {
       this.token = token;
       this.username = username;
-
-      // Save to localStorage
       localStorage.setItem('user-token', token);
       localStorage.setItem('user-name', username);
     },

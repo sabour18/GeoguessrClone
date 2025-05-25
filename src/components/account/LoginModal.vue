@@ -1,26 +1,3 @@
-<template>
-  <div class="modal-backdrop">
-    <div class="modal">
-      <h2>Login</h2>
-      <form @submit.prevent="handleLogin">
-        <input type="text"
-               v-model="username"
-               placeholder="Username"
-               required />
-        <input type="password"
-               v-model="password"
-               placeholder="Password"
-               required />
-        <div class="actions">
-          <button type="submit">Login</button>
-          <button type="button" @click="$emit('close')">Cancel</button>
-        </div>
-        <p v-if="error" class="error">{{ error }}</p>
-      </form>
-    </div>
-  </div>
-</template>
-
 <script>
   import { login } from '@/services/accountService';
 
@@ -37,15 +14,44 @@
         try {
           await login(this.username, this.password);
           this.$emit('close');
+          this.$router.push('/');
         } catch (err) {
-          this.error = 'Login failed. Check your credentials.';
+          this.error = 'Username or password incorrect.';
         }
       },
     },
   };
 </script>
 
+<template>
+  <div class="modal-backdrop">
+    <div class="modal">
+      <h2 class="login-title">Login</h2>
+      <form @submit.prevent="handleLogin">
+        <input type="text"
+               v-model="username"
+               placeholder="Username"
+               required />
+        <input type="password"
+               v-model="password"
+               placeholder="Password"
+               required />
+        <p v-if="error" class="error">{{ error }}</p>
+
+        <div class="actions">
+          <button type="submit">Login</button>
+          <button type="button" @click="$emit('close')">Cancel</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</template>
+
 <style scoped>
+  .login-title{
+      color:black;
+  }
+
   .modal-backdrop {
     position: fixed;
     top: 0;
