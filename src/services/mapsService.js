@@ -6,7 +6,7 @@ export const getAllMaps = () => axios.get(`${API_URL}/AllMaps`);
 export function getLocationsByMapId(mapId) {
   return axios.get(`${API_URL}/locations`, {
     params: {
-      mapId: mapId
+      mapId: mapId,
     }
   });
 }

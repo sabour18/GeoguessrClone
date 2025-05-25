@@ -3,6 +3,7 @@
     props: {
       name: String,
       mapId: String,
+      image: String,
       selected: Boolean
     },
     methods: {
@@ -16,7 +17,7 @@
 <template>
   <div class="card-container" :class="{selected: selected}" @click="selectMap">
     <div class="card-image">
-      <!-- <img :src="`../../../public/maps/${this.mapId}.png`"/> -->
+      <img :src="`../../../public/maps/${this.image}`"/>
     </div>
     <h3>{{this.name}}</h3>
   </div>

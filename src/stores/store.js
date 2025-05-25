@@ -5,7 +5,7 @@ const useGameStore = defineStore('game', {
   state: () => ({
     selectedMap: null,
     isPlayingGame: false,
-    totalRounds: 5,
+    totalRounds: null,
     currentRound: 1,
     locations: [],
     currentLocation: null,
@@ -21,11 +21,11 @@ const useGameStore = defineStore('game', {
     ],
   },
   actions: {
-    async startTheGame(map) {
+    async startTheGame(map, rounds) {
       return new Promise((resolve) => {
     this.currentScore = 0;
     this.selectedMap = map;
-    this.totalRounds = 5;
+    this.totalRounds = rounds;
     this.currentRound = 1;
     this.isPlayingGame = true;
     resolve(); // Simulate async completion

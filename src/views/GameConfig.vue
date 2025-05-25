@@ -1,14 +1,16 @@
 <script>
   import Header from '@/components/shared/TheHeader.vue'
   import MapCard from '@/components/Configuration/MapCard.vue'
+  import RoundsSelector from '@/components/Configuration/RoundsSelector.vue'
   import useGameStore from '@/stores/store'
   import { mapState, mapActions } from 'pinia';
   import { getAllMaps } from '@/services/mapsService';
 
   export default {
   components: {
-    Header,
-    MapCard,
+      Header,
+      MapCard,
+      RoundsSelector,
     },
     emits: [
       'select-map',
@@ -18,17 +20,9 @@
     },
   data(){
     return{
-      //availableMaps: [
-      //  { name: 'Canada', mapId: 'Canada'},
-      //  { name: 'Canada Vancouver Island', mapId: 'CanadaVI'},
-      //  { name: 'Famous Locations', mapId: 'FamousLocations'},
-      //  { name: 'World Cities', mapId: 'cities'},
-      //  { name: 'Funny/Cool Locations', mapId: 'FunnyCool'},
-      //  { name: 'Personal Locations', mapId: 'Personal'},
-      //],
       maps:[],
       selectedMap: null,
-      selectedRounds: 5,
+      selectedRounds: null,
     }
     },
     mounted() {
@@ -41,15 +35,19 @@
     selectMap(mapId) {
       this.selectedMap = mapId;
     },
-    selectRounds() {
-      this.selectedRounds = 5;
+    selectRounds(rounds) {
+      this.selectedRounds = rounds;
     },
     async startGame(){
       if (!this.selectedMap) {
         alert('Please select a map before starting the game!');
         return;
       }
-      await this.startTheGame(this.selectedMap);
+      if (!this.selectedRounds) {
+        alert('Please select mount of rounds to play, before starting the game!');
+        return;
+      }
+      await this.startTheGame(this.selectedMap, this.selectedRounds);
       await this.setLocations();
 
       this.$router.push({ name: 'play'});
@@ -73,6 +71,7 @@
                  v-for="map in this.maps"
                  :name="map.name"
                  :mapId="map.mapId"
+                 :image="map.image"
                  :selected="map.mapId === this.selectedMap"
                  @select-map="selectMap"
                  />
@@ -80,7 +79,7 @@
     </div>
     <div class="round-container">
       <h3>Select amount of rounds:</h3>
-      <button class="rounds-5" @click="selectRounds">5</button>
+      <RoundsSelector @select-rounds="selectRounds($event)"/>
     </div>
     <button @click="startGame">Start</button>
   </div>
@@ -144,21 +143,4 @@
   .map-card{
     margin: 15px 20px 15px 20px;
   }
-
-  /* Round selection section*/
-  .round-container{
-      margin-top: 40px;
-      display: flex;
-      flex-direction:column;
-  }
-
-  .round-container h3 {
-    margin: 10px;
-  }
-
-  .rounds-5 {
-    color: white;
-    background: rgb(7,32,71,0.85);
-  }
-
 </style>
