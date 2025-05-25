@@ -22,7 +22,7 @@
 <template>
   <TheHeader />
   <div class="welcome-menu">
-    <h1 class="welcome">Welcome {{ isLoggedIn ? `${userStore.username}` : '' }} to my Geoguessr Clone!</h1>
+    <h1 class="welcome">Welcome {{ isLoggedIn ? `${userStore.username}! To` : 'to' }} my Geoguessr Clone!</h1>
     <p>Click play and select the map to start playing!</p>
     <div class="button-group">
       <form action="/GameConfig">
