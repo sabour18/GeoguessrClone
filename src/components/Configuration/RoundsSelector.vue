@@ -30,6 +30,9 @@
     flex-direction: column;
   }
 
+  button{
+      margin:5px;
+  }
   .round-container h3 {
     margin: 10px;
   }
