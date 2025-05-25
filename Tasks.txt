@@ -2,13 +2,15 @@
 
 TODO:
 
+- Games are on the backend
+- Register account screen
+- Final Results screen, that shows final score
+
 - Add sound when make a guess
 - change point calculation formula
-- Final Results screen, that shows final score
 - Change the guess markers
 - Change styling on distance and score on round result screen
 - Add an optional timer to config screen
-- Add option to how many rounds to play on  config screen
 
 
 
@@ -40,3 +42,4 @@ DONE:
 	- Random Official World
 - Have only 1 map initilized for each, street view, guesser, and result
 	- and just change the map location each round
+- Add option to how many rounds to play on  config screen

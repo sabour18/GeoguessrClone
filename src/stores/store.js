@@ -52,7 +52,7 @@ const useGameStore = defineStore('game', {
         const tempLocations = response.data;
 
         const indexes = [];
-        // get 5 random indexes, cant be duplicates
+        // get number of rounds of random indexes, cant be duplicates
         for (let i = 0; i < this.totalRounds; i++) {
           let randIndex = Math.floor(Math.random() * tempLocations.length);
           while (indexes.includes(randIndex)) {
