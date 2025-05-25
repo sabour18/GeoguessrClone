@@ -3,6 +3,7 @@
   import MapCard from '@/components/Configuration/MapCard.vue'
   import useGameStore from '@/stores/store'
   import { mapState, mapActions } from 'pinia';
+  import { getAllMaps } from '@/services/mapsService';
 
   export default {
   components: {
@@ -17,26 +18,32 @@
     },
   data(){
     return{
-      availableMaps: [
-        { name: 'Canada', mapId: 'Canada'},
-        { name: 'Canada Vancouver Island', mapId: 'CanadaVI'},
-        { name: 'Famous Locations', mapId: 'FamousLocations'},
-        { name: 'World Cities', mapId: 'cities'},
-        { name: 'Funny/Cool Locations', mapId: 'FunnyCool'},
-        { name: 'Personal Locations', mapId: 'Personal'},
-      ],
+      //availableMaps: [
+      //  { name: 'Canada', mapId: 'Canada'},
+      //  { name: 'Canada Vancouver Island', mapId: 'CanadaVI'},
+      //  { name: 'Famous Locations', mapId: 'FamousLocations'},
+      //  { name: 'World Cities', mapId: 'cities'},
+      //  { name: 'Funny/Cool Locations', mapId: 'FunnyCool'},
+      //  { name: 'Personal Locations', mapId: 'Personal'},
+      //],
+      maps:[],
       selectedMap: null,
       selectedRounds: 5,
     }
-  },
+    },
+    mounted() {
+      getAllMaps().then(response => {
+        this.maps = response.data;
+      });
+    },
     methods: {
       ...mapActions(useGameStore, ['startTheGame','setTotalRounds', 'goToNextRound', 'setTotalRounds', 'setLocations']), // Map store actions
     selectMap(mapId) {
       this.selectedMap = mapId;
-    },//selectMap
+    },
     selectRounds() {
       this.selectedRounds = 5;
-    },//selectRounds
+    },
     async startGame(){
       if (!this.selectedMap) {
         alert('Please select a map before starting the game!');
@@ -46,7 +53,7 @@
       await this.setLocations();
 
       this.$router.push({ name: 'play'});
-    }//startGame
+    }
   }
 }
 </script>
@@ -63,7 +70,7 @@
       <h3>Select a Map:</h3>
       <div class="map-list">
         <MapCard class="map-card"
-                 v-for="map in this.availableMaps"
+                 v-for="map in this.maps"
                  :name="map.name"
                  :mapId="map.mapId"
                  :selected="map.mapId === this.selectedMap"
@@ -75,8 +82,6 @@
       <h3>Select amount of rounds:</h3>
       <button class="rounds-5" @click="selectRounds">5</button>
     </div>
-    
-
     <button @click="startGame">Start</button>
   </div>
 </template>

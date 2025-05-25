@@ -7,8 +7,8 @@
     },
     methods: {
       selectMap() {
-        this.$emit('select-map', this.mapId);
-      },//selectMap  
+        this.$emit('select-map', this.mapId);console.log(this.map.Id);
+      }, 
     },
   }
 </script>
@@ -16,7 +16,7 @@
 <template>
   <div class="card-container" :class="{selected: selected}" @click="selectMap">
     <div class="card-image">
-      <img :src="`../../../public/maps/${this.mapId}.png`"/>
+      <!-- <img :src="`../../../public/maps/${this.mapId}.png`"/> -->
     </div>
     <h3>{{this.name}}</h3>
   </div>

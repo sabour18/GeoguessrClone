@@ -10,6 +10,7 @@
     <PackageJsonScriptsPreview Condition="$(PackageJsonScriptsPreview) == ''">vite preview</PackageJsonScriptsPreview>
     <PackageJsonScriptsLint Condition="$(PackageJsonScriptsLint) == ''">eslint . --fix</PackageJsonScriptsLint>
     <PackageJsonDependenciesGooglemapsMapLoader Condition="$(PackageJsonDependenciesGooglemapsMapLoader) == ''">^0.2.0</PackageJsonDependenciesGooglemapsMapLoader>
+    <PackageJsonDependenciesAxios Condition="$(PackageJsonDependenciesAxios) == ''">^1.9.0</PackageJsonDependenciesAxios>
     <PackageJsonDependenciesPinia Condition="$(PackageJsonDependenciesPinia) == ''">^2.3.0</PackageJsonDependenciesPinia>
     <PackageJsonDependenciesPiniaPluginPersistedstate Condition="$(PackageJsonDependenciesPiniaPluginPersistedstate) == ''">^4.2.0</PackageJsonDependenciesPiniaPluginPersistedstate>
     <PackageJsonDependenciesVue Condition="$(PackageJsonDependenciesVue) == ''">^3.5.13</PackageJsonDependenciesVue>

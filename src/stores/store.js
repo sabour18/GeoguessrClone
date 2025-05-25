@@ -1,4 +1,5 @@
 import { defineStore } from 'pinia'
+import { getLocationsByMapId } from '@/services/mapsService';
 
 const useGameStore = defineStore('game', {
   state: () => ({
@@ -47,25 +48,24 @@ const useGameStore = defineStore('game', {
     },
     async setLocations() {
       try {
-        // Dynamically import the JSON map based on the route query parameter
-        const mapFile = await import(`@/maps/${this.selectedMap}.json`);
-        this.mapJson = mapFile.customCoordinates;
-        // Generate locations after the map data is loaded
+        // TODO: Do this differently, maybe in a component
+        const response = await getLocationsByMapId(this.selectedMap);
+        const tempLocations = response.data;
+
         const indexes = [];
         // get 5 random indexes, cant be duplicates
         for (let i = 0; i < this.totalRounds; i++) {
-          let randIndex = Math.floor(Math.random() * this.mapJson.length);
+          let randIndex = Math.floor(Math.random() * tempLocations.length);
           while (indexes.includes(randIndex)) {
-            randIndex = Math.floor(Math.random() * this.mapJson.length);
+            randIndex = Math.floor(Math.random() * tempLocations.length);
           }
           indexes.push(randIndex);
         }
 
-        this.locations = indexes.map((index) => this.mapJson[index]);
-
-        this.currentLocation = this.locations[this.currentRound-1];
+        this.locations = indexes.map((index) => tempLocations[index]);
+        this.currentLocation = this.locations[this.currentRound-1];      
       } catch (error) {
-        console.error('Failed to load map JSON:', error);
+        console.error('Failed to retrieve map locations.', error);
       }
     }
   }
