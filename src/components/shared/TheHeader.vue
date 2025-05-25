@@ -1,11 +1,12 @@
 <script setup>
-
+  import LogInOutButton from '@/components/shared/LogInOutButton.vue'
 </script>
 
 <template>
   <nav>  
     <header>
-      <a href="/"><span class="material-symbols-outlined">home</span></a>
+      <a href="/" class="home-btn material-symbols-outlined">home</a>
+      <LogInOutButton></LogInOutButton>
     </header>
     </nav>
 </template>
@@ -19,17 +20,15 @@
   }
 
   header {
-    padding: 1.5rem;
-    opacity: .5;
+    display: flex;
+    flex-direction:row;
+    justify-content:space-between;
+    align-items:center;
+    padding: 18px;
     background-color: #072047;
   }
 
-  button {
-    padding: 10px 20px;
-    border: none;
-    font-size: 1rem;
-    cursor: pointer;
-    border-radius: 5px;
+  home-btn{
   }
 
 </style>

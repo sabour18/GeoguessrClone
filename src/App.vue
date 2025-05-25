@@ -1,5 +1,12 @@
 <script setup>
   import HomePage from '@/views/Home.vue'
+  import { onMounted } from 'vue';
+  import { useUserStore } from '@/stores/userStore';
+
+  onMounted(() => {
+    const userStore = useUserStore();
+    userStore.loadUserFromStorage();
+  });
 </script>
 
 <template>

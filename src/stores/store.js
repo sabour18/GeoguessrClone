@@ -48,7 +48,6 @@ const useGameStore = defineStore('game', {
     },
     async setLocations() {
       try {
-        // TODO: Do this differently, maybe in a component
         const response = await getLocationsByMapId(this.selectedMap);
         const tempLocations = response.data;
 
