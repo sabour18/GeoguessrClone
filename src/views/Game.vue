@@ -3,6 +3,7 @@
   import MapChooser from '@/components/Game/MapChooser.vue'
   import Result from '@/components/Game/Result.vue'
   import ExitGame from '@/components/Game/ExitGame.vue'
+  import FinalResult from '@/components/Game/FinalResult.vue'
 
   import useGameStore from '@/stores/store'
   import { mapState, mapActions } from 'pinia';
@@ -13,7 +14,8 @@
       StreetView,
       MapChooser,
       Result,
-      ExitGame
+      ExitGame,
+      FinalResult,
     },
     computed: {
       ...mapState(useGameStore, ['recordLocation', 'isPlayingGame', 'totalRounds', 'currentRound', 'currentScore', 'currentLocation', 'locations']), // Map store states
@@ -23,6 +25,7 @@
         mapJson: null,
         guessLocation: null,
         show: false,
+        showFinalResult: false,
       }
     },
     emits: [
@@ -39,7 +42,7 @@
         this.goToNextRound(score);
 
         if (this.currentRound > this.totalRounds) {
-          this.$router.push('/');
+          this.showFinalResult = true;
         }
 
         this.show = false;
@@ -52,6 +55,7 @@
   <StreetView/>
   <MapChooser @show-result="showResult"/>
   <Result v-if="this.show" @nextRound="nextRound" :actualLocation="this.currentLocation" :guessLocation="this.guessLocation"/>
+  <FinalResult v-if="this.showFinalResult"></FinalResult>
 <div class="ui">
   <div>Round: {{this.currentRound}}/{{this.totalRounds}}</div>
   <div>Score: {{this.currentScore}}pts</div>

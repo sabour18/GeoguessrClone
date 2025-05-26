@@ -13,6 +13,11 @@
         line: null
       }
     },
+    computed: {
+      gameStore() {
+        return useGameStore();
+      }
+    },
     props: {
       actualLocation: Object,
       guessLocation: Object,
@@ -32,17 +37,35 @@
       async initFinalResultMap() {
         const mapDiv = document.getElementById("res");
         this.map = new google.maps.Map(mapDiv, roundResultOptions);
-
+        
         
         this.addFinalMarkers();
-      },
+      },  
       async addFinalMarkers() {
-        for(int i = 0; ){
-
+        for (let i = 0; i < this.gameStore.totalRounds; i++){
+          this.drawLines(i);
+          this.drawMarkers(i);
         }
-        this.drawLine();
       },
-      drawLine() {
+      async drawMarkers(index) {
+        const { AdvancedMarkerElement } = await google.maps.importLibrary("marker");
+
+        const actualMarker = new AdvancedMarkerElement({
+          map: this.map,
+          position: { lat: this.gameStore.locations[index].lat, lng: this.gameStore.locations[index].lng },
+        });
+        this.markers.push(actualMarker);
+
+        const guessPin = document.createElement("img");
+        guessPin.src = "https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png";
+        const guessMarker = new AdvancedMarkerElement({
+          map: this.map,
+          position: { lat: this.gameStore.guessedLocations[index].lat, lng: this.gameStore.guessedLocations[index].lng },
+          content: guessPin,
+        });
+        this.markers.push(guessMarker);
+      },
+      drawLines(index) {
         const lineSymbol = {
           path: "M 0,-1 0,1",
           strokeOpacity: 1,
@@ -52,8 +75,8 @@
 
         this.line = new google.maps.Polyline({
           path: [
-            new google.maps.LatLng(this.actualLocation.lat, this.actualLocation.lng),
-            new google.maps.LatLng(this.guessLocation.lat, this.guessLocation.lng)
+            new google.maps.LatLng(this.gameStore.locations[index].lat, this.gameStore.locations[index].lng),
+            new google.maps.LatLng(this.gameStore.guessedLocations[index].lat, this.gameStore.guessedLocations[index].lng)
           ],
           strokeOpacity: 0,
           icons: [
