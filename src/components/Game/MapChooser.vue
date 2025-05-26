@@ -2,6 +2,8 @@
   import { Loader } from '@googlemaps/js-api-loader';
   import Result from '@/components/Game/Result.vue'
   import { guessOptions } from "@/utils/mapOptions.js";
+  import useGameStore from '@/stores/store'
+  import { mapState, mapActions } from 'pinia';
 
   export default {
     data() {
@@ -10,6 +12,9 @@
         marker: null,
         guessMade: false
       }
+    },
+    computed: {
+      ...mapState(useGameStore, ['recordLocation']), // Map store states
     },
     async mounted() {
       const apiOptions = {
@@ -23,6 +28,7 @@
       });
     },
     methods: {
+      ...mapActions(useGameStore, ['recordLocation']),
       initGuessMap() {
         // Remove the previous guess marker
         if (this.marker) {
@@ -56,6 +62,7 @@
           alert("Please place a marker first");
           return;
         }
+        this.recordLocation(JSON.parse(JSON.stringify(this.marker.position)));
 
         this.$emit('show-result', this.marker);
 

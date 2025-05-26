@@ -16,7 +16,7 @@
       ExitGame
     },
     computed: {
-      ...mapState(useGameStore, ['isPlayingGame', 'totalRounds', 'currentRound', 'currentScore', 'currentLocation', 'locations']), // Map store states
+      ...mapState(useGameStore, ['recordLocation', 'isPlayingGame', 'totalRounds', 'currentRound', 'currentScore', 'currentLocation', 'locations']), // Map store states
     },
     data() {
       return {
@@ -29,7 +29,7 @@
       'show-result',
     ],
     methods: {
-      ...mapActions(useGameStore, ['setTotalRounds', 'goToNextRound']), // Map store actions
+      ...mapActions(useGameStore, ['recordLocation','setTotalRounds', 'goToNextRound']), // Map store actions
       showResult(marker) {
         this.guessLocation = JSON.parse(JSON.stringify(marker.position));
 

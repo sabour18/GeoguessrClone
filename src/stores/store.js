@@ -10,6 +10,7 @@ const useGameStore = defineStore('game', {
     locations: [],
     currentLocation: null,
     currentScore: 0,
+    guessedLocations: [],
   }),
   persist: {
     enabled: true,
@@ -30,12 +31,15 @@ const useGameStore = defineStore('game', {
     this.isPlayingGame = true;
     resolve(); // Simulate async completion
   });
-},
+    },
+    recordLocation(guess) {
+      console.log(guess);
+      this.guessedLocations[this.currentRound - 1] = guess;
+    },
     goToNextRound(score) {
       this.currentScore += score;
       this.currentRound += 1;
       this.currentLocation = this.locations[this.currentRound - 1];
-      console.log(this.locations);
     },
     setTotalRounds(rounds) {
       this.totalRounds = rounds;
