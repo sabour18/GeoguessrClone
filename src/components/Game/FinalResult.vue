@@ -99,9 +99,10 @@
 <template>
   <div class="result">
     <div id="res"></div>
-    <div class="result-nums">
-      <div class="distance">Distance: {{ this.distance }}km away</div>
-      <div class="score">Score: {{ this.score }} pts</div>
+    <div class="result-nums"
+         v-for="(round, index) in this.gameStore.locations">
+      <div class="distance">Round {{index+1}}</div>
+      <div class="score">Score: 0 pts</div>
     </div>
     <button class="result-button" @click="this.finishGame">End Game</button>
   </div>
