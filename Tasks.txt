@@ -2,19 +2,18 @@
 
 TODO:
 
-- Games are on the backend
+- Games are on the backend ********
 - Register account screen
-- Final Results screen, that shows final score
-
 - Add sound when make a guess
 - change point calculation formula
-- Change the guess markers
-- Change styling on distance and score on round result screen
+- Change the guess marker
 - Add an optional timer to config screen
 
 - CLEAN UP
 
 DONE:
+- Final Results screen, that shows final score
+- Change styling on distance and score on round result screen
 - Calculate distance between the 2 points
 - Draw line between guess and actual location
 - Grey out make guess button, until a marker is placed
