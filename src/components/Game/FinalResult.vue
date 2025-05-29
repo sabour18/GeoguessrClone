@@ -101,14 +101,27 @@
     <div id="res"></div>
     <div class="result-nums"
          v-for="(round, index) in this.gameStore.locations">
-      <div class="distance">Round {{index+1}}</div>
-      <div class="score">Score: 0 pts</div>
+      <div class="round-score">
+        <div class="distance">Round {{index+1}}</div>
+        <div class="score">Score: 0 pts</div>
+      </div>
+      <hr />
+
     </div>
     <button class="result-button" @click="this.finishGame">End Game</button>
   </div>
 </template>
 
 <style scoped>
+  hr{
+      align-items:center;
+  }
+  .round-score{
+      display:flex;
+      justify-content:space-between;
+      padding:5px;
+  }
+
   .result {
     position: fixed;
     width: 100%;
@@ -124,10 +137,8 @@
   }
 
   .result-nums{
-    width: 50%;
+    width: 23rem;
     margin:20px;
-    display:flex;
-    justify-content: space-between;
   }
   .distance, .score{
       color:white;
