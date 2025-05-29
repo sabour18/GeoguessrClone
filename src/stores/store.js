@@ -47,10 +47,15 @@ const useGameStore = defineStore('game', {
       this.totalRounds = rounds;
     },
     exitGame() {
-      this.currentRound = 1;
-      this.currentLocation = null;
-      this.locations = null;
+      this.selectedMap = null;
       this.isPlayingGame = false;
+      this.totalRounds = null;
+      this.currentRound = 1;
+      this.locations = [];
+      this.currentLocation = null;
+      this.currentScore = 0;
+      this.roundScores = [];
+      this.guessedLocations = [];
     },
     async setLocations() {
       try {

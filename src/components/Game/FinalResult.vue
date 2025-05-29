@@ -90,6 +90,7 @@
         });
       },
       finishGame() {
+        this.gameStore.exitGame();
         this.$router.push('/');
       }
     },
