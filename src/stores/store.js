@@ -10,6 +10,7 @@ const useGameStore = defineStore('game', {
     locations: [],
     currentLocation: null,
     currentScore: 0,
+    roundScores: [],
     guessedLocations: [],
   }),
   persist: {
@@ -38,6 +39,7 @@ const useGameStore = defineStore('game', {
     },
     goToNextRound(score) {
       this.currentScore += score;
+      this.roundScores[this.currentRound - 1] = score;
       this.currentRound += 1;
       this.currentLocation = this.locations[this.currentRound - 1];
     },

@@ -103,23 +103,26 @@
          v-for="(round, index) in this.gameStore.locations">
       <div class="round-score">
         <div class="distance">Round {{index+1}}</div>
-        <div class="score">Score: 0 pts</div>
+        <div class="score">Score: {{this.gameStore.roundScores[index]}}</div>
       </div>
       <hr />
-
     </div>
+    <div class="tot-score">Total Score: {{this.gameStore.currentScore}}</div>
     <button class="result-button" @click="this.finishGame">End Game</button>
   </div>
 </template>
 
 <style scoped>
-  hr{
-      align-items:center;
+  .tot-score{
+      color:white;
   }
-  .round-score{
-      display:flex;
-      justify-content:space-between;
-      padding:5px;
+  .result-button{
+      margin-top:25px;
+  }
+  .round-score {
+    display: flex;
+    justify-content: space-between;
+    padding: 5px;
   }
 
   .result {
@@ -129,20 +132,19 @@
     left: 0;
     top: 0;
     z-index: 10;
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     align-items: center;
     background: rgb(7,32,71,0.85);
+    color: white;
   }
 
   .result-nums{
     width: 23rem;
     margin:20px;
   }
-  .distance, .score{
-      color:white;
-  }
+
   #res {
     position: relative;
     width: 900px;
