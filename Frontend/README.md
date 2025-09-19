@@ -1,14 +1,12 @@
-# map-picker
+# Geogussr Clone Project
 
-Hello! Welcome to the trial and errors of creating a maps project inspired by GeoGuessr. The educational world location guesser.
+I originally did not want to pay the subscription to play the Official Geogussr game. So I decided to create my own. Using the google maps and street view API.
 
-## Recommended IDE Setup
+This project is created using Vue.js for the frontend, and it uses .NET Core for the backend.
+User Accounts, Maps, and locations are stored in a local database, using .NET Core to retieved the appropriate data.
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
-
-## Customize configuration
-
-See [Vite Configuration Reference](https://vite.dev/config/).
+So the project will not work if cloned, unless you modify or create your own database with location data.
+If someone gets it working, the app is set up for only authenticated accounts to play games.
 
 ## Project Setup
 
