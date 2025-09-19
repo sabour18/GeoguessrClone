@@ -1,6 +1,6 @@
-# map-picker
+# Geogussr Clone Project
 
-Hello! Welcome to the trial and errors of creating a maps project inspired by GeoGuessr. The educational world location guesser.
+I orignally did not want to pay the subscription to play the Official Geogussr game. So I decided to create my own. Using the google maps and street view API.
 
 ## Recommended IDE Setup
 
