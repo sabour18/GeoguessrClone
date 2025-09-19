@@ -1,5 +1,5 @@
-import { defineStore } from 'pinia'
-import { getLocationsByMapId } from '@/services/mapsService';
+import { defineStore } from 'pinia';
+import { getNumberLocations } from '@/services/mapsService';
 
 const useGameStore = defineStore('game', {
   state: () => ({
@@ -34,7 +34,6 @@ const useGameStore = defineStore('game', {
   });
     },
     recordLocation(guess) {
-      console.log(guess);
       this.guessedLocations[this.currentRound - 1] = guess;
     },
     goToNextRound(score) {
@@ -59,20 +58,23 @@ const useGameStore = defineStore('game', {
     },
     async setLocations() {
       try {
-        const response = await getLocationsByMapId(this.selectedMap);
-        const tempLocations = response.data;
+        console.log(this.selectedMap);
+        const response = await getNumberLocations(this.selectedMap, this.totalRounds);
+        //const tempLocations = response.data;
 
-        const indexes = [];
-        // get number of rounds of random indexes, cant be duplicates
-        for (let i = 0; i < this.totalRounds; i++) {
-          let randIndex = Math.floor(Math.random() * tempLocations.length);
-          while (indexes.includes(randIndex)) {
-            randIndex = Math.floor(Math.random() * tempLocations.length);
-          }
-          indexes.push(randIndex);
-        }
+        //const indexes = [];
+        //// get number of rounds of random indexes, cant be duplicates
+        //for (let i = 0; i < this.totalRounds; i++) {
+        //  let randIndex = Math.floor(Math.random() * tempLocations.length);
+        //  while (indexes.includes(randIndex)) {
+        //    randIndex = Math.floor(Math.random() * tempLocations.length);
+        //  }
+        //  indexes.push(randIndex);
+        //}
 
-        this.locations = indexes.map((index) => tempLocations[index]);
+        //this.locations = indexes.map((index) => tempLocations[index]);
+        this.locations = response.data;
+        console.log(response);
         this.currentLocation = this.locations[this.currentRound-1];      
       } catch (error) {
         console.error('Failed to retrieve map locations.', error);

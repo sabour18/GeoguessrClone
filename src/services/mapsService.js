@@ -1,12 +1,31 @@
 import axios from 'axios';
+import { useUserStore } from '@/stores/userStore'
 
-const API_URL = 'https://localhost:7023/api/maps';
+const api = axios.create({
+  baseURL: 'https://localhost:7023/api/maps',
+})
 
-export const getAllMaps = () => axios.get(`${API_URL}/AllMaps`);
+api.interceptors.request.use((config) => {
+  const userStore = useUserStore()
+  if (userStore.token) {
+    config.headers.Authorization = `Bearer ${userStore.token}`
+  }
+  return config
+})
+
+export const getAllMaps = () => api.get(`/AllMaps`);
 export function getLocationsByMapId(mapId) {
-  return axios.get(`${API_URL}/locations`, {
+  return api.get(`}/locations`, {
     params: {
       mapId: mapId,
+    }
+  });
+}
+export function getNumberLocations(mapId, rounds) {
+  return api.get(`/locationsx`, {
+    params: {
+      mapId: mapId,
+      rounds
     }
   });
 }

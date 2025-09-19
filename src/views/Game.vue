@@ -19,6 +19,9 @@
     },
     computed: {
       ...mapState(useGameStore, ['recordLocation', 'isPlayingGame', 'totalRounds', 'currentRound', 'currentScore', 'currentLocation', 'locations']), // Map store states
+      isLastRound() {
+        return this.currentRound >= this.totalRounds;
+      }
     },
     data() {
       return {
@@ -39,12 +42,11 @@
         this.show = true;
       },//showResult
       nextRound(score) {
-        this.goToNextRound(score);
-
-        if (this.currentRound > this.totalRounds) {
+        if (this.isLastRound) {
           this.showFinalResult = true;
+        } else {
+          this.goToNextRound(score);
         }
-
         this.show = false;
       }//nextRound
     }
@@ -54,7 +56,7 @@
 <template>
   <StreetView/>
   <MapChooser @show-result="showResult"/>
-  <Result v-if="this.show" @nextRound="nextRound" :actualLocation="this.currentLocation" :guessLocation="this.guessLocation"/>
+  <Result v-if="this.show" @nextRound="nextRound" :actualLocation="this.currentLocation" :guessLocation="this.guessLocation" :isLastRound="this.isLastRound"/>
   <FinalResult v-if="this.showFinalResult"></FinalResult>
 <div class="ui">
   <div>Round: {{this.currentRound}}/{{this.totalRounds}}</div>

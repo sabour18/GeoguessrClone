@@ -12,9 +12,18 @@
       userStore() {
         return useUserStore();
       },
-      isLoggedIn() {
-        return this.userStore.isLoggedIn;
+      isAuthenticated() {
+        return this.userStore.isAuthenticated;
       },
+    },
+    methods: {
+      handlePlayClick() {
+        if (!this.isAuthenticated){
+          alert("You must log in to play!");
+          return;
+        }
+        this.$router.push("/GameConfig");
+      }
     }
   }
 </script>
@@ -22,12 +31,10 @@
 <template>
   <TheHeader />
   <div class="welcome-menu">
-    <h1 class="welcome">Welcome {{ isLoggedIn ? `${userStore.username}! To` : 'to' }} my Geoguessr Clone!</h1>
+    <h1 class="welcome">Welcome {{ isAuthenticated ? `${userStore.username}! To` : 'to' }} my Geoguessr Clone!</h1>
     <p>Click play and select the map to start playing!</p>
     <div class="button-group">
-      <form action="/GameConfig">
-        <button type="submit">Play</button>
-      </form>
+        <button @click="handlePlayClick">Play</button>
     </div>
   </div>
   <TheFooter />

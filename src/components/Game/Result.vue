@@ -15,6 +15,7 @@
     props: {
       actualLocation: Object,
       guessLocation: Object,
+      isLastRound: Boolean,
     },
     async mounted() {
       const apiOptions = {
@@ -95,7 +96,9 @@
       <div class="distance">Distance: {{ this.distance }}km away</div>
       <div class="score">Score: {{ this.score }} pts</div>
     </div>
-    <button class="result-button" @click="this.nextRound">Next</button>
+    <button class="result-button" @click="this.nextRound">
+      {{ this.isLastRound ? 'Finish' : 'Next Round'}}
+    </button>
   </div>
 </template>
 

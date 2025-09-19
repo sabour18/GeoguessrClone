@@ -8,7 +8,7 @@
     },
     methods: {
       selectMap() {
-        this.$emit('select-map', this.mapId);console.log(this.map.Id);
+        this.$emit('select-map', this.mapId);
       }, 
     },
   }

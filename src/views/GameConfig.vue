@@ -28,7 +28,10 @@
     mounted() {
       getAllMaps().then(response => {
         this.maps = response.data;
+
+        console.log(response);
       });
+
     },
     methods: {
       ...mapActions(useGameStore, ['startTheGame','setTotalRounds', 'goToNextRound', 'setTotalRounds', 'setLocations']), // Map store actions

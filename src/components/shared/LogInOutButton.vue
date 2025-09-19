@@ -15,14 +15,13 @@
       userStore() {
         return useUserStore();
       },
-      isLoggedIn() {
-        return this.userStore.isLoggedIn;
+      isAuthenticated() {
+        return this.userStore.isAuthenticated;
       },
     },
     methods: {
       handleClick() {
-        if (this.isLoggedIn) {
-          console.log("sdafsd");
+        if (this.isAuthenticated) {
           this.userStore.logout();
           this.$router.push('/');
         } else {
@@ -35,7 +34,7 @@
 
 <template>
   <div class="log-btn" @click="handleClick">
-    {{ isLoggedIn ? `Logout` : 'Login' }}
+    {{ isAuthenticated ? `Logout` : 'Login' }}
   </div>
 
   <LoginModal v-if="showModal" @close="showModal = false" />
