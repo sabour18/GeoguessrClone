@@ -1,6 +1,6 @@
 # Geogussr Clone Project
 
-I orignally did not want to pay the subscription to play the Official Geogussr game. So I decided to create my own. Using the google maps and street view API.
+I originally did not want to pay the subscription to play the Official Geogussr game. So I decided to create my own. Using the google maps and street view API.
 
 This project is created using Vue.js for the frontend, and it uses .NET Core for the backend.
 User Accounts, Maps, and locations are stored in a local database, using .NET Core to retieved the appropriate data.
