@@ -37,8 +37,7 @@ const useGameStore = defineStore('game', {
       this.guessedLocations[this.currentRound - 1] = guess;
     },
     goToNextRound(score) {
-      this.currentScore += score;
-      this.roundScores[this.currentRound - 1] = score;
+      this.saveRoundScore(score);
       this.currentRound += 1;
       this.currentLocation = this.locations[this.currentRound - 1];
     },
@@ -55,6 +54,10 @@ const useGameStore = defineStore('game', {
       this.currentScore = 0;
       this.roundScores = [];
       this.guessedLocations = [];
+    },
+    saveRoundScore(score) {
+      this.currentScore += score;
+      this.roundScores[this.currentRound - 1] = score;
     },
     async setLocations() {
       try {

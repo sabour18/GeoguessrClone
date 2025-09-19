@@ -35,7 +35,7 @@
       'show-result',
     ],
     methods: {
-      ...mapActions(useGameStore, ['recordLocation','setTotalRounds', 'goToNextRound']), // Map store actions
+      ...mapActions(useGameStore, ['recordLocation','setTotalRounds', 'goToNextRound', 'saveRoundScore']), // Map store actions
       showResult(marker) {
         this.guessLocation = JSON.parse(JSON.stringify(marker.position));
 
@@ -43,6 +43,7 @@
       },//showResult
       nextRound(score) {
         if (this.isLastRound) {
+          this.saveRoundScore(score);
           this.showFinalResult = true;
         } else {
           this.goToNextRound(score);
