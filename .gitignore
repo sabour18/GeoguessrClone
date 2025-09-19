@@ -47,6 +47,7 @@ TestResults/
 *.user
 *.suo
 *.pdb
+.sln
 
 # Frontend build
 dist/
