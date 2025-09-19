@@ -10,7 +10,8 @@
       return {
         map: null,
         marker: null,
-        guessMade: false
+        guessMade: false,
+        hoverTimeout: null
       }
     },
     computed: {
@@ -68,14 +69,30 @@
 
         this.guessMade = false;
         this.initGuessMap();
-      }//submitGuess
+      },//submitGuess
+      applyHoverEffect(element) {
+        if (this.hoverTimeout) {
+          clearTimeout(this.hoverTimeout);
+          this.hoverTimeout = null;
+        }
+        if (!element.classList.contains('hover-active')) {
+          element.classList.add('hover-active');
+        }      },
+      removeHoverEffect(element) {
+        this.hoverTimeout = setTimeout(() => {
+          element.classList.remove('hover-active');
+          this.hoverTimeout = null;
+        }, 1100);
+      },
     }
   }
 </script>
 
 <template>
-  <div class="map-container">
-    <div id="map"></div>
+  <div class="map-container"
+               @mouseenter="applyHoverEffect($event.target)"
+               @mouseleave="removeHoverEffect($event.target)">
+    <div id="map" ></div>
     <form class="submit-guess-form" @submit="submitGuess">
       <button class="guess-made"  :disabled="!this.guessMade" >Make Guess</button>
     </form>
@@ -116,9 +133,17 @@
 
     #map:hover {
       cursor: crosshair !important;
+      opacity: 1;
+      width: 100%;
+      height: 100%;
     }
 
-  .map-container:hover {
+  .hover-active {
+    height: 70vh;
+    width: 50vw;
+    opacity: 1;
+  }
+  /*.map-container:hover {
     height: 70vh;
     width: 50vw;
   }
@@ -127,6 +152,21 @@
     width: 100%;
     height: 100%;
   }
+
+  #map:hover {
+    cursor: crosshair !important;
+  }
+
+  .map-container:hover {
+    height: 70vh;
+    width: 50vw;
+  }
+
+    .map-container:hover #map {
+      opacity: 1;
+      width: 100%;
+      height: 100%;
+    }*/
 
   .guess-made:disabled {
     width: 100%;
