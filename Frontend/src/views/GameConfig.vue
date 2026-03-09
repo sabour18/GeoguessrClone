@@ -26,6 +26,7 @@
     }
     },
     mounted() {
+      alert("hello");
       getAllMaps().then(response => {
         this.maps = response.data;
 

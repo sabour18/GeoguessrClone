@@ -41,7 +41,7 @@ router.beforeEach((to, from, next) => {
 
   // Block unauthenticated access to routes that require it
   if (to.meta.requiresAuth && !auth.isAuthenticated) {
-    return next({ name: 'home' });
+    //return next({ name: 'home' });
   }
 
   // Validate game state for play route

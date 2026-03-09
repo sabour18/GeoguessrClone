@@ -19,8 +19,8 @@
     methods: {
       handlePlayClick() {
         if (!this.isAuthenticated){
-          alert("You must log in to play!");
-          return;
+          //alert("You must log in to play!");
+          //return;
         }
         this.$router.push("/GameConfig");
       }
